@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "../../styles/login.module.css";
+import styles from "../../../styles/login.module.css";
 
 function Login() {
   const teacher = useRef(null);

@@ -25,16 +25,16 @@ function Navbar() {
           }
         >
           <div className={styles.linkGrp}>
-            <Link href={"/auth/login"}>Login</Link>
-            <Link href={"/auth/login"}>Login</Link>
-            <Link className={styles.lastLink} href={"/auth/login"}>
+            <Link href={"/auth/Login"}>Login</Link>
+            <Link href={"/auth/Login"}>Login</Link>
+            <Link className={styles.lastLink} href={"/auth/Login"}>
               Login
             </Link>
           </div>
           <div className={styles.linkGrp}>
-            <Link href={"/auth/login"}>Login</Link>
-            <Link href={"/auth/login"}>Login</Link>
-            <Link className={styles.lastLink} href={"/auth/login"}>
+            <Link href={"/auth/Login"}>Login</Link>
+            <Link href={"/auth/Login"}>Login</Link>
+            <Link className={styles.lastLink} href={"/auth/Login"}>
               Login
             </Link>
           </div>
