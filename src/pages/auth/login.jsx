@@ -4,6 +4,7 @@ import styles from "../../styles/login.module.css";
 function Login() {
   const teacher = useRef(null);
   const admin = useRef(null);
+  const a = 5;
   const [teacherLogin, setTeacherLogin] = useState(true);
   const changeUser = () => {
     if (teacherLogin) {
