@@ -1,7 +1,16 @@
 :root {
-  --color-scheme: blue
+  --color-dark-blue: #1E2945;
+  --color-dark-red: #321A30;
+  --color-orange: #F67E64;
+  --color-purple: #685CB5;
+  --color-green: #0AD774;
 }
 
+html {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--color-dark-blue);
+  color: white;
+}
 
 
 * {

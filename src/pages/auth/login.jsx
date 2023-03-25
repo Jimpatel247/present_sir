@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/login.module.css";
 
 function login() {
@@ -21,8 +21,8 @@ function login() {
       <div className={styles.container}>
         <div className={styles.box}>
           <div ref={teacher} className={styles.teacher}>
-            <button onClick={changeUser}>Login as Admin</button>
             <form>
+              <img src="/teacher.svg" alt="Professor" />
               <h2>Teacher Login</h2>
               <div className={styles.fields}>
                 <div className={styles.inputGrp}>
@@ -47,13 +47,20 @@ function login() {
                     Password
                   </label>
                 </div>
-                <input type="submit" value="Login" />
+                <input
+                  className={styles.submitBtn}
+                  type="submit"
+                  value="LOGIN"
+                />
+                <p className={styles.changeUserLink} onClick={changeUser}>
+                  Login as Admin
+                </p>
               </div>
             </form>
           </div>
           <div ref={admin} className={styles.admin}>
-            <button onClick={changeUser}>Login as Teacher</button>
             <form>
+              <img src="/teacher.svg" alt="Admin" />
               <h2>Admin Login</h2>
               <div className={styles.fields}>
                 <div className={styles.inputGrp}>
@@ -78,7 +85,14 @@ function login() {
                     Password
                   </label>
                 </div>
-                <input type="submit" value="Login" />
+                <input
+                  className={styles.submitBtn}
+                  type="submit"
+                  value="LOGIN"
+                />
+                <p className={styles.changeUserLink} onClick={changeUser}>
+                  Login as Teacher
+                </p>
               </div>
             </form>
           </div>
