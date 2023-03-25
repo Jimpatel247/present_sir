@@ -7,6 +7,7 @@
     background-color: var(--dark-blue-dark-4);
     color: #fff;
     padding: 1rem;
+    overflow: hidden;
     display: flex;
     position: absolute;
     top: 0;
@@ -43,7 +44,7 @@
     .ham {
         display: block;
         position: absolute;
-        z-index: 9999;
+        z-index: 99;
         top: 50%;
         right: 1rem;
         transform: translateY(-50%);
@@ -51,14 +52,15 @@
     }
 
     .navbar__links {
-        display: none;
+        position: absolute;
         margin-bottom: 1em;
+        z-index: 998;
+        right: -100%;
     }
 
     .navbar__links_active {
         display: flex;
         flex-direction: column;
-        position: absolute;
         right: 0;
         top: 0;
         width: 80%;
