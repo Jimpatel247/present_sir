@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-function Dash() {
+function TeacherDash() {
   const [batches, setBatches] = useState([]);
   return <div>Teacher dash</div>;
 }
 
-export default Dash;
+export default TeacherDash;
