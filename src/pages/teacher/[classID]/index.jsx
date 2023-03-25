@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
-function index() {
+function Index() {
   const router = useRouter();
   const { classID } = router.query;
   return <div>{classID}</div>;
 }
 
-export default index;
+export default Index;
