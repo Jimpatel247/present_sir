@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import styles from "../../../styles/login.module.css";
 
@@ -17,88 +18,96 @@ function Login() {
     }
   };
   return (
-    <div className="page-container">
-      <div className={styles.container}>
-        <div className={styles.box}>
-          <div ref={teacher} className={styles.teacher}>
-            <form>
-              <img src="/teacher.svg" alt="Professor" />
-              <h2>Teacher Login</h2>
-              <div className={styles.fields}>
-                <div className={styles.inputGrp}>
+    <>
+      <Head>
+        <title>Login</title>
+      </Head>
+      <div className="page-container">
+        <div className={styles.container}>
+          <div className={styles.box}>
+            <div ref={teacher} className={styles.teacher}>
+              <form>
+                <img src="/teacher.svg" alt="Professor" />
+                <h2>Teacher Login</h2>
+                <div className={styles.fields}>
+                  <div className={styles.inputGrp}>
+                    <input
+                      className={styles.emailInput}
+                      type="text"
+                      id="teacherEmail"
+                      required
+                    />
+                    <label htmlFor="teacherEmail" className={styles.emailLabel}>
+                      Email
+                    </label>
+                  </div>
+                  <div className={styles.inputGrp}>
+                    <input
+                      className={styles.passInput}
+                      type="password"
+                      id="teacherPassword"
+                      required
+                    />
+                    <label
+                      className={styles.passLabel}
+                      htmlFor="teacherPassword"
+                    >
+                      Password
+                    </label>
+                  </div>
                   <input
-                    className={styles.emailInput}
-                    type="text"
-                    id="teacherEmail"
-                    required
+                    className={styles.submitBtn}
+                    type="submit"
+                    value="LOGIN"
                   />
-                  <label htmlFor="teacherEmail" className={styles.emailLabel}>
-                    Email
-                  </label>
+                  <p className={styles.changeUserLink} onClick={changeUser}>
+                    Login as Admin
+                  </p>
                 </div>
-                <div className={styles.inputGrp}>
+              </form>
+            </div>
+            <div ref={admin} className={styles.admin}>
+              <form>
+                <img src="/teacher.svg" alt="Admin" />
+                <h2>Admin Login</h2>
+                <div className={styles.fields}>
+                  <div className={styles.inputGrp}>
+                    <input
+                      className={styles.emailInput}
+                      type="text"
+                      id="email"
+                      required
+                    />
+                    <label htmlFor="email" className={styles.emailLabel}>
+                      Email
+                    </label>
+                  </div>
+                  <div className={styles.inputGrp}>
+                    <input
+                      className={styles.passInput}
+                      type="password"
+                      id="password"
+                      required
+                    />
+                    <label className={styles.passLabel} htmlFor="password">
+                      Password
+                    </label>
+                  </div>
                   <input
-                    className={styles.passInput}
-                    type="password"
-                    id="teacherPassword"
-                    required
+                    className={styles.submitBtn}
+                    type="submit"
+                    value="LOGIN"
                   />
-                  <label className={styles.passLabel} htmlFor="teacherPassword">
-                    Password
-                  </label>
+                  <p className={styles.changeUserLink} onClick={changeUser}>
+                    Login as Teacher
+                  </p>
                 </div>
-                <input
-                  className={styles.submitBtn}
-                  type="submit"
-                  value="LOGIN"
-                />
-                <p className={styles.changeUserLink} onClick={changeUser}>
-                  Login as Admin
-                </p>
-              </div>
-            </form>
-          </div>
-          <div ref={admin} className={styles.admin}>
-            <form>
-              <img src="/teacher.svg" alt="Admin" />
-              <h2>Admin Login</h2>
-              <div className={styles.fields}>
-                <div className={styles.inputGrp}>
-                  <input
-                    className={styles.emailInput}
-                    type="text"
-                    id="email"
-                    required
-                  />
-                  <label htmlFor="email" className={styles.emailLabel}>
-                    Email
-                  </label>
-                </div>
-                <div className={styles.inputGrp}>
-                  <input
-                    className={styles.passInput}
-                    type="password"
-                    id="password"
-                    required
-                  />
-                  <label className={styles.passLabel} htmlFor="password">
-                    Password
-                  </label>
-                </div>
-                <input
-                  className={styles.submitBtn}
-                  type="submit"
-                  value="LOGIN"
-                />
-                <p className={styles.changeUserLink} onClick={changeUser}>
-                  Login as Teacher
-                </p>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

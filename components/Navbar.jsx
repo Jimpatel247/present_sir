@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import styles from "../src/styles/components/navbar.module.css";
 import { RiMenu3Line } from "react-icons/ri";
+import { IoMdClose } from "react-icons/io";
 
 function Navbar() {
   const [active, setActive] = useState(false);
@@ -12,10 +13,17 @@ function Navbar() {
           <Link href={"/"}>Home</Link>
         </div>
         <div>
-          <RiMenu3Line
-            onClick={() => setActive(!active)}
-            className={styles.ham}
-          />
+          {active ? (
+            <IoMdClose
+              onClick={() => setActive(!active)}
+              className={styles.ham}
+            />
+          ) : (
+            <RiMenu3Line
+              onClick={() => setActive(!active)}
+              className={styles.ham}
+            />
+          )}
         </div>
         <div
           className={
@@ -25,16 +33,32 @@ function Navbar() {
           }
         >
           <div className={styles.linkGrp}>
-            <Link href={"/auth/Login"}>Login</Link>
-            <Link href={"/auth/Login"}>Login</Link>
-            <Link className={styles.lastLink} href={"/auth/Login"}>
+            <Link onClick={() => setActive(!active)} href={"/Teacher"}>
+              Teacher Dashboard
+            </Link>
+            <Link onClick={() => setActive(!active)} href={"/Admin"}>
+              Admin DashBoard
+            </Link>
+            <Link
+              onClick={() => setActive(!active)}
+              className={styles.lastLink}
+              href={"/auth/Login"}
+            >
               Login
             </Link>
           </div>
           <div className={styles.linkGrp}>
-            <Link href={"/auth/Login"}>Login</Link>
-            <Link href={"/auth/Login"}>Login</Link>
-            <Link className={styles.lastLink} href={"/auth/Login"}>
+            <Link onClick={() => setActive(!active)} href={"/auth/Login"}>
+              Login
+            </Link>
+            <Link onClick={() => setActive(!active)} href={"/auth/Login"}>
+              Login
+            </Link>
+            <Link
+              onClick={() => setActive(!active)}
+              className={styles.lastLink}
+              href={"/auth/Login"}
+            >
               Login
             </Link>
           </div>
