@@ -1,0 +1,68 @@
+.container {
+    display: grid;
+    width: 98vw;
+    grid-template-columns: 5fr 3fr;
+    padding: 2.5vh 2.5vw;
+    gap: 1em;
+}
+
+.batch,
+.sem,
+.teacher {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-dark-blue);
+    padding-inline: 1rem;
+    border-radius: 15px;
+    padding-bottom: 1rem;
+}
+
+.batch {
+    grid-column: 1/2;
+}
+
+.batch>*,
+.sem>*,
+.teacher>* {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: .7em;
+    padding-inline: 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.batchItem,
+.semItem,
+.teacherItem {
+    background-color: var(--dark-blue-light-2);
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.batchdata,
+.teacherdata {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    width: 30%;
+}
+
+.header button {
+    background-color: transparent;
+    border: 1px solid var(--color-orange);
+    padding: 0.5em;
+    color: var(--color-orange);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.sem {
+    grid-column: 2/3;
+}
+
+.teacher {
+    grid-column: 1/3;
+}
