@@ -25,7 +25,7 @@ function Navbar() {
           }
         >
           <div className={styles.linkGrp}>
-            <Link href={"/auth/Login"}>Login</Link>
+            <Link href={"/auth/teacher"}>Admin Dashboard</Link>
             <Link href={"/auth/Login"}>Login</Link>
             <Link className={styles.lastLink} href={"/auth/Login"}>
               Login
