@@ -4,7 +4,126 @@
   --color-orange: #F67E64;
   --color-purple: #685CB5;
   --color-green: #0AD774;
+
+
+  --dark-blue-dark-5: #0f1526;
+  --dark-blue-dark-4: #121831;
+  --dark-blue-dark-3: #141d3c;
+  --dark-blue-dark-2: #172248;
+  --dark-blue-dark-1: #1a2b53;
+  --dark-blue-light-1: #1f345e;
+  --dark-blue-light-2: #244069;
+  --dark-blue-light-3: #294b74;
+  --dark-blue-light-4: #2d547f;
+  --dark-blue-light-5: #315d8b;
+  --dark-red-dark-5: #160a16;
+  --dark-red-dark-4: #1a0d1c;
+  --dark-red-dark-3: #1e0f23;
+  --dark-red-dark-2: #22122a;
+  --dark-red-dark-1: #251531;
+  --dark-red-light-1: #2a1837;
+  --dark-red-light-2: #2e1a3e;
+  --dark-red-light-3: #321d44;
+  --dark-red-light-4: #361f4b;
+  --dark-red-light-5: #3a224f;
+  --orange-dark-5: #c9604c;
+  --orange-dark-4: #d06b5c;
+  --orange-dark-3: #d6776c;
+  --orange-dark-2: #df8381;
+  --orange-dark-1: #e79095;
+  --orange-light-1: #f28c7c;
+  --orange-light-2: #f69b8e;
+  --orange-light-3: #f9a9a0;
+  --orange-light-4: #fcc7ba;
+  --orange-light-5: #ffe5d5;
+  --purple-dark-5: #4d448a;
+  --purple-dark-4: #352f5f;
+  --purple-dark-3: #1f1a34;
+  --purple-dark-2: #0e081d;
+  --purple-dark-1: #000000;
+  --purple-light-1: #7e73c0;
+  --purple-light-2: #9d92d3;
+  --purple-light-3: #bcb2e6;
+  --purple-light-4: #dbd7f9;
+  --purple-light-5: #ffffff;
+  --green-dark-5: #0aaf65;
+  --green-dark-4: #097e4d;
+  --green-dark-3: #065b35;
+  --green-dark-2: #03381d;
+  --green-dark-1: #000000;
+  --green-light-1: #1ee38a;
+  --green-light-2: #4ef5a5;
+  --green-light-3: #7dffbf;
+  --green-light-4: #adffda;
+  --green-light-5: #ffffff;
 }
+
+
+/* --color-dark-blue:
+
+5 shades darker: #0f1526
+4 shades darker: #121831
+3 shades darker: #141d3c
+2 shades darker: #172248
+1 shade darker: #1a2b53
+1 shade lighter: #1f345e
+2 shades lighter: #244069
+3 shades lighter: #294b74
+4 shades lighter: #2d547f
+5 shades lighter: #315d8b
+--color-dark-red:
+
+5 shades darker: #160a16
+4 shades darker: #1a0d1c
+3 shades darker: #1e0f23
+2 shades darker: #22122a
+1 shade darker: #251531
+1 shade lighter: #2a1837
+2 shades lighter: #2e1a3e
+3 shades lighter: #321d44
+4 shades lighter: #361f4b
+5 shades lighter: #3a224f
+--color-orange:
+
+5 shades darker: #c9604c
+4 shades darker: #d06b5c
+3 shades darker: #d6776c
+2 shades darker: #df8381
+1 shade darker: #e79095
+1 shade lighter: #f28c7c
+2 shades lighter: #f69b8e
+3 shades lighter: #f9a9a0
+4 shades lighter: #fcc7ba
+5 shades lighter: #ffe5d5 
+
+Shades darker of --color-purple:
+
+#4d448a
+#352f5f
+#1f1a34
+#0e081d
+#000000
+Shades lighter of --color-purple:
+
+#7e73c0
+#9d92d3
+#bcb2e6
+#dbd7f9
+#ffffff
+Shades darker of --color-green:
+
+#0aaf65
+#097e4d
+#065b35
+#03381d
+#000000
+Shades lighter of --color-green:
+
+#1ee38a
+#4ef5a5
+#7dffbf
+#adffda
+#ffffff*/
 
 html {
   font-family: 'Roboto', sans-serif;
