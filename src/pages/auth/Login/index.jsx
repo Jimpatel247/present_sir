@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import styles from "../../styles/login.module.css";
+import styles from "../../../styles/login.module.css";
 
-function login() {
+function Login() {
   const teacher = useRef(null);
   const admin = useRef(null);
   const [teacherLogin, setTeacherLogin] = useState(true);
@@ -102,4 +102,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;
