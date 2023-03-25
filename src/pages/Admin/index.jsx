@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "../../styles/admin.module.css";
 import { IoIosArrowForward } from "react-icons/io";
+import Head from "next/head";
 
 function AdminDash() {
   const batchData = [
@@ -60,47 +61,52 @@ function AdminDash() {
     },
   ];
   return (
-    <div className="page-container">
-      <div className={styles.container}>
-        <div className={styles.batch}>
-          <div className={styles.header}>
-            <p>filter</p>
-            <button>+ Add batch</button>
-          </div>
-          {batchData.map((batch, key) => (
-            <div className={styles.batchItem} key={key}>
-              <div className={styles.batchdata}>
-                <div className={styles.batchItem__year}>
-                  {batch.branch}({batch.year})
+    <>
+      <Head>
+        <title>Admin Dashboard</title>
+      </Head>
+      <div className="page-container">
+        <div className={styles.container}>
+          <div className={styles.batch}>
+            <div className={styles.header}>
+              <p>filter</p>
+              <button>+ Add batch</button>
+            </div>
+            {batchData.map((batch, key) => (
+              <div className={styles.batchItem} key={key}>
+                <div className={styles.batchdata}>
+                  <div className={styles.batchItem__year}>
+                    {batch.branch}({batch.year})
+                  </div>
+                  <div className={styles.batchItem__sem}>
+                    {batch.currentSem}th Sem
+                  </div>
                 </div>
-                <div className={styles.batchItem__sem}>
-                  {batch.currentSem}th Sem
-                </div>
+                <IoIosArrowForward />
               </div>
-              <IoIosArrowForward />
-            </div>
-          ))}
-        </div>
-        <div className={styles.sem}>
-          <div className={styles.header}>
-            <p>filter</p>
-            <button>+ Add Sem</button>
+            ))}
           </div>
-        </div>
-        <div className={styles.teacher}>
-          <div className={styles.header}>
-            <p>filter</p>
-            <button>+ Add Teacher</button>
-          </div>
-          {teacherData.map((teacher, key) => (
-            <div className={styles.teacherItem} key={key}>
-              {teacher.name} ({teacher.initials})
-              <IoIosArrowForward />
+          <div className={styles.sem}>
+            <div className={styles.header}>
+              <p>filter</p>
+              <button>+ Add Sem</button>
             </div>
-          ))}
+          </div>
+          <div className={styles.teacher}>
+            <div className={styles.header}>
+              <p>filter</p>
+              <button>+ Add Teacher</button>
+            </div>
+            {teacherData.map((teacher, key) => (
+              <div className={styles.teacherItem} key={key}>
+                {teacher.name} ({teacher.initials})
+                <IoIosArrowForward />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
