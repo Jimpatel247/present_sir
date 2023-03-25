@@ -34,8 +34,21 @@
     gap: 1rem;
 }
 
+.ham {
+    display: none;
+}
+
 @media screen and (max-width: 768px) {
 
+    .ham {
+        display: block;
+        position: absolute;
+        z-index: 9999;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        font-size: 1.8rem;
+    }
 
     .navbar__links {
         display: none;
@@ -52,6 +65,7 @@
         padding-top: 7.5rem;
         z-index: 999;
         background-color: var(--dark-blue-dark-4);
+        transition: 0.5s;
         height: 100vh;
     }
 
@@ -62,7 +76,6 @@
         height: fit-content;
         width: 100%;
         border-bottom: 1px solid rgba(255, 255, 255, 0.363);
-        transition: 0.5s;
         padding-block: 1em;
     }
 
