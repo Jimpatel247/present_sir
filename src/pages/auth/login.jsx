@@ -23,7 +23,7 @@ function Login() {
           <div ref={teacher} className={styles.teacher}>
             <form>
               <img src="/teacher.svg" alt="Professor" />
-              <h2>Teacher Login 2</h2>
+              <h2>Teacher Login</h2>
               <div className={styles.fields}>
                 <div className={styles.inputGrp}>
                   <input
