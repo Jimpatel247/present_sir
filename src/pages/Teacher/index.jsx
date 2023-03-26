@@ -4,7 +4,6 @@ import initFirebase from "@/firebase/initFirebase";
 
 function TeacherDash() {
   initFirebase();
-  // console.log(analytics);
   return (
     <>
       <Head>

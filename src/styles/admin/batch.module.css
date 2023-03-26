@@ -1,0 +1,13 @@
+.container {
+    width: 100%;
+}
+
+.title {
+    margin: 0.7em;
+    color: var(--color-purple);
+}
+
+.form {
+    width: 100%;
+    padding: 1em;
+}
