@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "../../styles/admin.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import Head from "next/head";
+import Link from "next/link";
 
 function AdminDash() {
   const batchData = [
@@ -48,16 +49,20 @@ function AdminDash() {
   ];
   const teacherData = [
     {
-      name: "Tanmay Dubey",
-      initials: "TD",
+      name: "Jim Patel",
+      initials: "JP",
     },
     {
-      name: "Sriman Narayan",
-      initials: "SN",
+      name: "Manan Patel",
+      initials: "MP",
     },
     {
-      name: "Saurabh Kumar",
-      initials: "SK",
+      name: "Saurav Lokhande",
+      initials: "SL",
+    },
+    {
+      name: "Mayank Satapara",
+      initials: "MS",
     },
   ];
   return (
@@ -70,7 +75,11 @@ function AdminDash() {
           <div className={styles.batch}>
             <div className={styles.header}>
               <p>filter</p>
-              <button>+ Add batch</button>
+              <button>
+                <Link className={styles.link} href={"/Admin/Batch"}>
+                  + Add batch
+                </Link>
+              </button>
             </div>
             {batchData.map((batch, key) => (
               <div className={styles.batchItem} key={key}>
@@ -95,7 +104,11 @@ function AdminDash() {
           <div className={styles.teacher}>
             <div className={styles.header}>
               <p>filter</p>
-              <button>+ Add Teacher</button>
+              <button>
+                <Link className={styles.link} href={"/Admin/Teacher"}>
+                  + Add Teacher
+                </Link>
+              </button>
             </div>
             {teacherData.map((teacher, key) => (
               <div className={styles.teacherItem} key={key}>

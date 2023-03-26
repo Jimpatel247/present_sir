@@ -7,7 +7,7 @@ function TeacherDash() {
   return (
     <>
       <Head>
-        <title>Teacher's Dashboard</title>
+        <title>Teachers Dashboard</title>
       </Head>
 
       <div className="page-container">Teacher Dashboard</div>
