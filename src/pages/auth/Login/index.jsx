@@ -1,11 +1,42 @@
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
 import styles from "../../../styles/login.module.css";
+import { useAuth } from "context/AuthContext";
+import { useRouter } from "next/router";
+
 
 function Login() {
+  const router = useRouter()
   const teacher = useRef(null);
   const admin = useRef(null);
+  const [email,setEmail] =useState();
+  const [password,setPassword] =useState();
+  const [adminEmail,setAdminEmail] =useState();
+  const [adminPassword,setAdminPassword] =useState();
   const [teacherLogin, setTeacherLogin] = useState(true);
+  const [error, setError] = useState(null)
+  const [isLoggingIn, setIsLoggingIn] = useState(true)
+  const { login, signup, currentUser } = useAuth()
+  async function submitHandler(e) {
+    e.preventDefault()
+    if (!email || !password) {
+        setError('Please enter email and password')
+        return
+    }
+    if (isLoggingIn) {
+        try {
+            await login(email, password)
+            router.push ("/Teacher")
+            console.log("sab changa si1")
+            console.log(email)
+            console.log(password)
+        } catch (err) {
+            setError('Incorrect email or password')
+        }
+        return
+    }
+    await signup(email, password)
+}  
   const changeUser = () => {
     if (teacherLogin) {
       teacher.current.style.left = "-100%";
@@ -26,13 +57,15 @@ function Login() {
         <div className={styles.container}>
           <div className={styles.box}>
             <div ref={teacher} className={styles.teacher}>
-              <form>
+              <form onSubmit={submitHandler}>
                 <img src="/teacher.svg" alt="Professor" />
                 <h2>Teacher Login</h2>
                 <div className={styles.fields}>
                   <div className={styles.inputGrp}>
                     <input
                       className={styles.emailInput}
+                      onChange={(e)=>setEmail(e.target.value)}
+                      value={email}
                       type="text"
                       id="teacherEmail"
                       required
@@ -44,6 +77,8 @@ function Login() {
                   <div className={styles.inputGrp}>
                     <input
                       className={styles.passInput}
+                      onChange={(e)=>setPassword(e.target.value)}
+                      value={password}
                       type="password"
                       id="teacherPassword"
                       required
@@ -74,6 +109,8 @@ function Login() {
                   <div className={styles.inputGrp}>
                     <input
                       className={styles.emailInput}
+                      onChange={(e)=>setAdminEmail(e.target.value)}
+                      value={adminEmail}
                       type="text"
                       id="email"
                       required
@@ -85,6 +122,8 @@ function Login() {
                   <div className={styles.inputGrp}>
                     <input
                       className={styles.passInput}
+                      onChange={(e)=>setAdminPassword(e.target.value)}
+                      value={adminPassword}
                       type="password"
                       id="password"
                       required
