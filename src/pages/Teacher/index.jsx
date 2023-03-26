@@ -1,9 +1,9 @@
 import Head from "next/head";
-import { useState } from "react";
-import initFirebase from "@/firebase/initFirebase";
+// import { useState } from "react";
+// import initFirebase from "@/firebase/initFirebase";
 
 function TeacherDash() {
-  initFirebase();
+
   return (
     <>
       <Head>
