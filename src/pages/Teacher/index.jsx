@@ -8,6 +8,7 @@ function TeacherDash() {
     <>
       <Head>
         <title>Teachers Dashboard</title>
+        
       </Head>
 
       <div className="page-container">Teacher Dashboard</div>

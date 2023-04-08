@@ -2,6 +2,8 @@ import Head from "next/head";
 import React, { useState } from "react";
 import styles from "../../../styles/admin/batch.module.css";
 import { read, utils } from "xlsx";
+import {db,auth} from "../../../firebase/initFirebase";
+import { collection,addDoc} from "firebase/firestore";
 
 function Batch() {
   //badha teachers no data fetch karine niche na array ma store kari deje
@@ -68,6 +70,23 @@ function Batch() {
     console.log(fileData);
     console.log(branch + yearOfAdmission + semester);
     console.log(subjects);
+    
+    const colRef=collection(db,'batch')
+    console.log(colRef)
+    try {
+      const dataid=await addDoc(colRef,{
+        Branch:branch,
+        sem:semester,
+        students:fileData,
+        subjects:subjects,
+        year:yearOfAdmission
+  
+      })
+      console.log("Document written with ID: ",dataid.id)
+    } catch (error) {
+      console.log(error.message);
+    }
+   
   };
 
   return (
