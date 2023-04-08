@@ -1,33 +1,39 @@
 import Head from "next/head";
 import { useEffect, useRef, useState } from "react";
-import styles from "../../../styles/login.module.css";
+import styles from "../styles/login.module.css";
 import { useAuth } from "context/AuthContext";
 import { useRouter } from "next/router";
-
-
-function Login() {
+import { initializeApp } from 'firebase-admin/app';
+const firebaseConfig = {
+  /* apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APPID */
+  apiKey: "AIzaSyBXwXMQ7Epmgzba2ImBjsIFYRMbR75Xh5w",
+  authDomain: "presentsir-e6fb6.firebaseapp.com",
+  projectId: "presentsir-e6fb6",
+  storageBucket: "presentsir-e6fb6.appspot.com",
+  messagingSenderId: "823548679196",
+  appId: "1:823548679196:web:28f4f3c4690a8354223bd9",
+  measurementId: "G-PHY752KXEQ"
+  
+};
+var admin;
+if (!firebase?.apps?.length) {
+  admin= initializeApp(firebaseConfig );
+ }
+function Signup() {
   const router = useRouter()
   const teacher = useRef(null);
   const admin = useRef(null);
   const [email,setEmail] =useState();
   const [password,setPassword] =useState();
-  const [adminEmail,setAdminEmail] =useState();
-  const [adminPassword,setAdminPassword] =useState();
   const [teacherLogin, setTeacherLogin] = useState(true);
   const [error, setError] = useState(null)
   const [isLoggingIn, setIsLoggingIn] = useState(true)
-  const { login, signup, currentUser,logout } = useAuth() 
-  
-  async function grantAdminRole(email) {
-    const user = await admin.auth().getUserByEmail(email); // 1
-    if (user.customClaims && user.customClaims.admin === true) {
-        return;
-    } // 2
-    return admin.auth().setCustomUserClaims(user.uid, {
-        admin: true
-    }); // 3
-}
-
+  const { login, signup, currentUser } = useAuth()   
   async function submitHandler(e) {
     e.preventDefault()
     if (!email || !password) {
@@ -36,38 +42,32 @@ function Login() {
     }
     if (isLoggingIn) {
         try {
-          await logout();
-            await login(email, password)
-            console.log(currentUser)
-           /*  if(currentUser.uid != "PGK5ARFnRoXYo6d72b2eOo4B4xt2"){
-              console.log("You are not an admin shut the mouth up!!")
-              await logout();
-              console.log(currentUser);
-              router.push ("/auth/Login")
-            }
-            else{ */
-              router.push ("/Teacher")
-              console.log("sab changa si1") 
+
+            console.log("ham he:")
+            const temp=await admin.auth().getUserByEmail("admin3@gmail.com");
+            console.log(temp);
+            await signup(email, password)
+            console.log(currentUser.uid);
+            admin.auth().setCustomUserClaims(currentUser.uid, {
+              admin: true,
+            }).then(() => {
+              return {
+                message: `Success! ${data.email} has been made an admin.`,
+              };
+            }).catch((err) => {
+              return err;
+            });
+            console.log(currentUser);
             
-            
+            router.push ("/Teacher")
+            console.log("sab changa si1") 
         } catch (err) {
             setError('Incorrect email or password')
         }
         return
     }
-    await signup(email, password)
-}  
-  const changeUser = () => {
-    if (teacherLogin) {
-      teacher.current.style.left = "-100%";
-      admin.current.style.left = "0%";
-      setTeacherLogin(false);
-    } else {
-      teacher.current.style.left = "0%";
-      admin.current.style.left = "100%";
-      setTeacherLogin(true);
-    }
-  };
+    
+} 
   return (
     <>
       <Head>
@@ -79,7 +79,7 @@ function Login() {
             <div ref={teacher} className={styles.teacher}>
               <form onSubmit={submitHandler}>
                 <img src="/teacher.svg" alt="Professor" />
-                <h2>Teacher Login</h2>
+                <h2>કેમ દોસ્ત મજામા Sign Up કરી લઇએ?</h2>
                 <div className={styles.fields}>
                   <div className={styles.inputGrp}>
                     <input
@@ -107,21 +107,19 @@ function Login() {
                       className={styles.passLabel}
                       htmlFor="teacherPassword"
                     >
-                      Password
+                      Password ખાનગી સબ્દ તો નાખ 
                     </label>
                   </div>
                   <input
                     className={styles.submitBtn}
                     type="submit"
-                    value="LOGIN"
+                    value="Sign Up"
                   />
-                  <p className={styles.changeUserLink} onClick={changeUser}>
-                    Login as Admin
-                  </p>
-                </div>
+                  
+                </div> 
               </form>
             </div>
-            <div ref={admin} className={styles.admin}>
+           {/*  <div ref={admin} className={styles.admin}>
               <form>
                 <img src="/teacher.svg" alt="Admin" />
                 <h2>Admin Login</h2>
@@ -162,7 +160,7 @@ function Login() {
                   </p>
                 </div>
               </form>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -170,4 +168,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
