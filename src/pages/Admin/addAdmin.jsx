@@ -10,12 +10,8 @@ import {  createUserWithEmailAndPassword } from 'firebase/auth'
 import { doc,collection, addDoc,query, where } from "firebase/firestore"; 
 export default function addAdmin() {
     const router = useRouter()
-    const teacher = useRef(null);
-    const admin = useRef(null);
     const [email,setEmail] =useState();
     const [password,setPassword] =useState();
-    const [teacherLogin, setTeacherLogin] = useState(true);
-    const [error, setError] = useState(null)
     const [isLoggingIn, setIsLoggingIn] = useState(true)
     // const { login, signup, currentUser } = useAuth()   
     async function submitHandler(e) {
@@ -69,7 +65,7 @@ export default function addAdmin() {
         <div className="page-container">
           <div className={styles.container}>
             <div className={styles.box}>
-              <div ref={teacher} className={styles.teacher}>
+              <div className={styles.teacher}>
                 <form onSubmit={submitHandler}>
                   <img src="/teacher.svg" alt="Professor" />
                   <h2>કેમ દોસ્ત મજામા Sign Up કરી લઇએ?</h2>
