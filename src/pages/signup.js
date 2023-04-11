@@ -3,27 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../styles/login.module.css";
 import { useAuth } from "context/AuthContext";
 import { useRouter } from "next/router";
-import { initializeApp } from 'firebase-admin/app';
-const firebaseConfig = {
-  /* apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGINGSENDERID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APPID */
-  apiKey: "AIzaSyBXwXMQ7Epmgzba2ImBjsIFYRMbR75Xh5w",
-  authDomain: "presentsir-e6fb6.firebaseapp.com",
-  projectId: "presentsir-e6fb6",
-  storageBucket: "presentsir-e6fb6.appspot.com",
-  messagingSenderId: "823548679196",
-  appId: "1:823548679196:web:28f4f3c4690a8354223bd9",
-  measurementId: "G-PHY752KXEQ"
-  
-};
-var admin;
-if (!firebase?.apps?.length) {
-  admin= initializeApp(firebaseConfig );
- }
+import {auth, db } from "@/firebase/initFirebase";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
+
+import { doc,collection, addDoc,query, where } from "firebase/firestore"; 
+import {signup} from "../../context/AuthContext"
 function Signup() {
   const router = useRouter()
   const teacher = useRef(null);
@@ -41,32 +25,41 @@ function Signup() {
         return
     }
     if (isLoggingIn) {
-        try {
-
-            console.log("ham he:")
-            const temp=await admin.auth().getUserByEmail("admin3@gmail.com");
-            console.log(temp);
-            await signup(email, password)
-            console.log(currentUser.uid);
-            admin.auth().setCustomUserClaims(currentUser.uid, {
-              admin: true,
-            }).then(() => {
-              return {
-                message: `Success! ${data.email} has been made an admin.`,
-              };
-            }).catch((err) => {
-              return err;
-            });
-            console.log(currentUser);
-            
-            router.push ("/Teacher")
-            console.log("sab changa si1") 
-        } catch (err) {
-            setError('Incorrect email or password')
-        }
-        return
-    }
+      
+          createUserWithEmailAndPassword(auth, email, password).then(async function (){
+          const docRef = await addDoc(collection(db, "admins"), {
+            mail_id:email,
+          });
+          console.log("Document written with ID(bolo Jay shree ram): ", docRef.id);
+          router.push("/Admin")
+        }).catch((error) => {
+          if (error.code == "auth/email-already-in-use") {
+              alert("The email address is already in use");
+              return;
+          } else if (error.code == "auth/invalid-email") {
+              alert("The email address is not valid.");
+          } else if (error.code == "auth/operation-not-allowed") {
+              alert("Operation not allowed.");
+          } else if (error.code == "auth/weak-password") {
+              alert("The password is too weak.");
+          }
+        });
     
+
+     /* const q = query(collection(db, "admins"), where("mail_id", "==", email));
+     console.log(q)
+     if(!q)
+      {
+        const docRef = addDoc(collection(db, "admins"), {
+          mail_id:email,
+        });
+        console.log("Document written with ID(bolo Jay shree ram): ", docRef.id);
+        router.push("/Admin")
+      } */
+    
+
+    }
+  
 } 
   return (
     <>
@@ -107,7 +100,7 @@ function Signup() {
                       className={styles.passLabel}
                       htmlFor="teacherPassword"
                     >
-                      Password ખાનગી સબ્દ તો નાખ 
+                      Password (ખાનગી સબ્દ) તો નાખ 
                     </label>
                   </div>
                   <input

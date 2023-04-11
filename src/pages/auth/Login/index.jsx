@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "../../../styles/login.module.css";
 import { useAuth } from "context/AuthContext";
 import { useRouter } from "next/router";
+import { db } from "@/firebase/initFirebase";
 
 
 function Login() {
@@ -18,16 +19,7 @@ function Login() {
   const [isLoggingIn, setIsLoggingIn] = useState(true)
   const { login, signup, currentUser,logout } = useAuth() 
   
-  async function grantAdminRole(email) {
-    const user = await admin.auth().getUserByEmail(email); // 1
-    if (user.customClaims && user.customClaims.admin === true) {
-        return;
-    } // 2
-    return admin.auth().setCustomUserClaims(user.uid, {
-        admin: true
-    }); // 3
-}
-
+ 
   async function submitHandler(e) {
     e.preventDefault()
     if (!email || !password) {
@@ -36,18 +28,12 @@ function Login() {
     }
     if (isLoggingIn) {
         try {
-          await logout();
+          if(teacherLogin){
             await login(email, password)
-            console.log(currentUser)
-           /*  if(currentUser.uid != "PGK5ARFnRoXYo6d72b2eOo4B4xt2"){
-              console.log("You are not an admin shut the mouth up!!")
-              await logout();
-              console.log(currentUser);
-              router.push ("/auth/Login")
-            }
-            else{ */
-              router.push ("/Teacher")
-              console.log("sab changa si1") 
+            router.push ("/Teacher")
+            console.log("sab changa si teacher sab") 
+          }
+          
             
             
         } catch (err) {
@@ -55,7 +41,7 @@ function Login() {
         }
         return
     }
-    await signup(email, password)
+    /* await signup(email, password) */
 }  
   const changeUser = () => {
     if (teacherLogin) {
