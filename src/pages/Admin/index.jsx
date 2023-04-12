@@ -3,8 +3,23 @@ import styles from "../../styles/admin.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import Head from "next/head";
 import Link from "next/link";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import {auth, db } from "@/firebase/initFirebase";
+
 
 function AdminDash() {
+
+  const q = query(collection(db, "Teachers"), where("email", "!=", null));
+    
+    const teacherSnapshot =  getDocs(q).catch((error) => {
+     console.log(error);
+    });
+    console.log(teacherSnapshot.size)
+    /* querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      console.log(doc.data().name);
+      
+    }) */
   const batchData = [
     {
       branch: "ECE",
@@ -47,7 +62,8 @@ function AdminDash() {
       currentSem: 2,
     },
   ];
-  const teacherData = [
+  
+  /* const teacherData = [
     {
       name: "Jim Patel",
       initials: "JP",
@@ -64,7 +80,7 @@ function AdminDash() {
       name: "Mayank Satapara",
       initials: "MS",
     },
-  ];
+  ]; */
   return (
     <>
       <Head>
@@ -115,9 +131,9 @@ function AdminDash() {
                 </Link>
               </button>
             </div>
-            {teacherData.map((teacher, key) => (
+            {teacherSnapshot.forEach((teacher) => (
               <div className={styles.teacherItem} key={key}>
-                {teacher.name} ({teacher.initials})
+                {teacher.data().name} {/* ({teacher.initials}) */}
                 <IoIosArrowForward />
               </div>
             ))}
