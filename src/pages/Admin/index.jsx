@@ -1,25 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/admin.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import Head from "next/head";
 import Link from "next/link";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import {auth, db } from "@/firebase/initFirebase";
-
+import { auth, db } from "@/firebase/initFirebase";
 
 function AdminDash() {
-
   const q = query(collection(db, "Teachers"), where("email", "!=", null));
-    
-    const teacherSnapshot =  getDocs(q).catch((error) => {
-     console.log(error);
-    });
-    console.log(teacherSnapshot.size)
-    /* querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log(doc.data().name);
-      
-    }) */
+  const [teacherData, setTeacherData] = useState([]);
+  const getData = async () => {
+    await getDocs(q)
+      .then((querySnapshot) => {
+        setTeacherData([]);
+        querySnapshot.forEach((doc) => {
+          setTeacherData((teacherData) => [
+            ...teacherData,
+            {
+              name: doc.data().name,
+              initials: doc
+                .data()
+                .name.split(" ")
+                .map((name) => name[0])
+                .join("")
+                .toUpperCase(),
+            },
+          ]);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const batchData = [
     {
       branch: "ECE",
@@ -62,7 +79,7 @@ function AdminDash() {
       currentSem: 2,
     },
   ];
-  
+
   /* const teacherData = [
     {
       name: "Jim Patel",
@@ -115,11 +132,10 @@ function AdminDash() {
             <div className={styles.header}>
               <p>filter</p>
               <button>
-              <Link className={styles.link} href={"/Admin/addAdmin"}>
+                <Link className={styles.link} href={"/Admin/addAdmin"}>
                   + Add Admin
-              </Link>
+                </Link>
               </button>
-              
             </div>
           </div>
           <div className={styles.teacher}>
@@ -131,9 +147,9 @@ function AdminDash() {
                 </Link>
               </button>
             </div>
-            {teacherSnapshot.forEach((teacher) => (
+            {teacherData.map((teacher, key) => (
               <div className={styles.teacherItem} key={key}>
-                {teacher.data().name} {/* ({teacher.initials}) */}
+                {teacher.name} ({teacher.initials})
                 <IoIosArrowForward />
               </div>
             ))}

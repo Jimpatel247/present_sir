@@ -4,45 +4,41 @@ import styles from "../../../styles/login.module.css";
 import { useAuth } from "context/AuthContext";
 import { useRouter } from "next/router";
 import { db } from "@/firebase/initFirebase";
-
+import Image from "next/image";
 
 function Login() {
-  const router = useRouter()
+  const router = useRouter();
   const teacher = useRef(null);
   const admin = useRef(null);
-  const [email,setEmail] =useState();
-  const [password,setPassword] =useState();
-  const [adminEmail,setAdminEmail] =useState();
-  const [adminPassword,setAdminPassword] =useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [adminEmail, setAdminEmail] = useState();
+  const [adminPassword, setAdminPassword] = useState();
   const [teacherLogin, setTeacherLogin] = useState(true);
-  const [error, setError] = useState(null)
-  const [isLoggingIn, setIsLoggingIn] = useState(true)
-  const { login, signup, currentUser,logout } = useAuth() 
-  
- 
+  const [error, setError] = useState(null);
+  const [isLoggingIn, setIsLoggingIn] = useState(true);
+  const { login, signup, currentUser, logout } = useAuth();
+
   async function submitHandler(e) {
-    e.preventDefault()
+    e.preventDefault();
     if (!email || !password) {
-        setError('Please enter email and password')
-        return
+      setError("Please enter email and password");
+      return;
     }
     if (isLoggingIn) {
-        try {
-          if(teacherLogin){
-            await login(email, password)
-            router.push ("/Teacher")
-            console.log("sab changa si teacher sab") 
-          }
-          
-            
-            
-        } catch (err) {
-            setError('Incorrect email or password')
+      try {
+        if (teacherLogin) {
+          await login(email, password);
+          router.push("/Teacher");
+          console.log("sab changa si teacher sab");
         }
-        return
+      } catch (err) {
+        setError("Incorrect email or password");
+      }
+      return;
     }
     /* await signup(email, password) */
-}  
+  }
   const changeUser = () => {
     if (teacherLogin) {
       teacher.current.style.left = "-100%";
@@ -64,13 +60,18 @@ function Login() {
           <div className={styles.box}>
             <div ref={teacher} className={styles.teacher}>
               <form onSubmit={submitHandler}>
-                <img src="/teacher.svg" alt="Professor" />
+                <Image
+                  src="/teacher.svg"
+                  alt="Professor"
+                  width={150}
+                  height={150}
+                />
                 <h2>Teacher Login</h2>
                 <div className={styles.fields}>
                   <div className={styles.inputGrp}>
                     <input
                       className={styles.emailInput}
-                      onChange={(e)=>setEmail(e.target.value)}
+                      onChange={(e) => setEmail(e.target.value)}
                       value={email}
                       type="text"
                       id="teacherEmail"
@@ -83,7 +84,7 @@ function Login() {
                   <div className={styles.inputGrp}>
                     <input
                       className={styles.passInput}
-                      onChange={(e)=>setPassword(e.target.value)}
+                      onChange={(e) => setPassword(e.target.value)}
                       value={password}
                       type="password"
                       id="teacherPassword"
@@ -109,13 +110,18 @@ function Login() {
             </div>
             <div ref={admin} className={styles.admin}>
               <form>
-                <img src="/teacher.svg" alt="Admin" />
+                <Image
+                  src="/teacher.svg"
+                  alt="Admin"
+                  width={150}
+                  height={150}
+                />
                 <h2>Admin Login</h2>
                 <div className={styles.fields}>
                   <div className={styles.inputGrp}>
                     <input
                       className={styles.emailInput}
-                      onChange={(e)=>setAdminEmail(e.target.value)}
+                      onChange={(e) => setAdminEmail(e.target.value)}
                       value={adminEmail}
                       type="text"
                       id="email"
@@ -128,7 +134,7 @@ function Login() {
                   <div className={styles.inputGrp}>
                     <input
                       className={styles.passInput}
-                      onChange={(e)=>setAdminPassword(e.target.value)}
+                      onChange={(e) => setAdminPassword(e.target.value)}
                       value={adminPassword}
                       type="password"
                       id="password"
