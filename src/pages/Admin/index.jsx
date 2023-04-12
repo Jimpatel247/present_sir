@@ -98,7 +98,12 @@ function AdminDash() {
           <div className={styles.sem}>
             <div className={styles.header}>
               <p>filter</p>
-              <button>+ Add Sem</button>
+              <button>
+              <Link className={styles.link} href={"/Admin/addAdmin"}>
+                  + Add Admin
+              </Link>
+              </button>
+              
             </div>
           </div>
           <div className={styles.teacher}>
