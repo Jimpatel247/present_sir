@@ -132,7 +132,7 @@ function AdminDash() {
             <div className={styles.header}>
               <p>filter</p>
               <button>
-                <Link className={styles.link} href={"/Admin/addAdmin"}>
+                <Link className={styles.link} href={"/Admin/AddAdmin"}>
                   + Add Admin
                 </Link>
               </button>
@@ -142,7 +142,7 @@ function AdminDash() {
             <div className={styles.header}>
               <p>filter</p>
               <button>
-                <Link className={styles.link} href={"/Admin/Teacher"}>
+                <Link className={styles.link} href={"/Admin/AddTeacher"}>
                   + Add Teacher
                 </Link>
               </button>
