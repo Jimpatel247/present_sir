@@ -109,7 +109,7 @@ function AdminDash() {
             <div className={styles.header}>
               <p>filter</p>
               <button>
-                <Link className={styles.link} href={"/Admin/Batch"}>
+                <Link className={styles.link} href={"/Admin/AddBatch"}>
                   + Add batch
                 </Link>
               </button>
