@@ -40,19 +40,6 @@ export default function addAdmin() {
                 alert("The password is too weak.");
             }
           });
-      
-  
-       /* const q = query(collection(db, "admins"), where("mail_id", "==", email));
-       console.log(q)
-       if(!q)
-        {
-          const docRef = addDoc(collection(db, "admins"), {
-            mail_id:email,
-          });
-          console.log("Document written with ID(bolo Jay shree ram): ", docRef.id);
-          router.push("/Admin")
-        } */
-      
   
       }
     
