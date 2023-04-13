@@ -8,7 +8,7 @@ import {auth, db } from "@/firebase/initFirebase";
 import {  createUserWithEmailAndPassword } from 'firebase/auth'
 
 import { doc,collection, addDoc,query, where } from "firebase/firestore"; 
-export default function addAdmin() {
+export default function AddAdmin() {
     const router = useRouter()
     const [email,setEmail] =useState();
     const [password,setPassword] =useState();
