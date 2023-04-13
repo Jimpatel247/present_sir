@@ -2,8 +2,8 @@ import Head from "next/head";
 import React, { useState } from "react";
 import styles from "../../../styles/admin/batch.module.css";
 import { read, utils } from "xlsx";
-import {db,auth} from "../../../firebase/initFirebase";
-import { collection,addDoc} from "firebase/firestore";
+import { db, auth } from "../../../firebase/initFirebase";
+import { collection, addDoc } from "firebase/firestore";
 
 function Batch() {
   //badha teachers no data fetch karine niche na array ma store kari deje
@@ -57,7 +57,9 @@ function Batch() {
         const wb = read(bufferArray, { type: "buffer" });
         const wsname = wb.SheetNames[0];
         const ws = wb.Sheets[wsname];
-        const data = utils.sheet_to_json(ws);
+        const data = utils.sheet_to_json(ws, { header: ["en_no", "name"] });
+        data.shift();
+        console.log(data);
         setFileData(data);
       };
     } else {
@@ -70,23 +72,21 @@ function Batch() {
     console.log(fileData);
     console.log(branch + yearOfAdmission + semester);
     console.log(subjects);
-    
-    const colRef=collection(db,'batch')
-    console.log(colRef)
+
+    const colRef = collection(db, "batch");
+    console.log(colRef);
     try {
-      const dataid=await addDoc(colRef,{
-        Branch:branch,
-        sem:semester,
-        students:fileData,
-        subjects:subjects,
-        year:yearOfAdmission
-  
-      })
-      console.log("Document written with ID: ",dataid.id)
+      const dataid = await addDoc(colRef, {
+        Branch: branch,
+        sem: semester,
+        students: fileData,
+        subjects: subjects,
+        year: yearOfAdmission,
+      });
+      console.log("Document written with ID: ", dataid.id);
     } catch (error) {
       console.log(error.message);
     }
-   
   };
 
   return (
@@ -98,12 +98,6 @@ function Batch() {
         <div className={styles.container}>
           <h1 className={styles.title}>New Batch</h1>
           <div className={styles.form}>
-            <input
-              onChange={handleFileUpload}
-              type="file"
-              name="xlFile"
-              id=""
-            />
             <select
               value={yearOfAdmission}
               onChange={(e) => setYearOfAdmission(e.target.value)}
@@ -181,6 +175,32 @@ function Batch() {
                 +
               </button>
             </div>
+            <input
+              onChange={handleFileUpload}
+              type="file"
+              name="xlFile"
+              id=""
+            />
+            <p>*make sure that the file is in the following format</p>
+          </div>
+          <div className={styles.previewData}>
+            <table>
+              <thead>
+                <tr>
+                  <th>EnrollmentNo</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {fileData &&
+                  fileData.map((student, key) => (
+                    <tr key={key}>
+                      <td>{student["en_no"]}</td>
+                      <td>{student["name"]}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
             <button onClick={handleFileSubmit}>Upload</button>
           </div>
         </div>
