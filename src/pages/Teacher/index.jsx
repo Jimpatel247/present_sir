@@ -11,6 +11,7 @@ import Link from "next/link";
 function TeacherDash() {
   const router = useRouter();
   const { currentUser } = useAuth();
+  const [classData, setclassData] = useState([]);
   if (currentUser == null) {
     router.push("/auth/Login");
     return;
@@ -19,7 +20,6 @@ function TeacherDash() {
     collection(db, "Teachers"),
     where("email", "==", currentUser.email)
   );
-  const [classData, setclassData] = useState([]);
   const getData = async () => {
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
