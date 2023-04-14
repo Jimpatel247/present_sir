@@ -1,35 +1,41 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import styles from "../../../styles/admin/batch.module.css";
 import { read, utils } from "xlsx";
 import { db, auth } from "../../../firebase/initFirebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc ,doc,updateDoc, arrayUnion,query,where,getDoc,getDocs} from "firebase/firestore";
 
 function Batch() {
   //badha teachers no data fetch karine niche na array ma store kari deje
-
-  const teacherData = [
-    {
-      teacherName: "Jim Patel",
-      initials: "JP",
-    },
-    {
-      teacherName: "Manan Patel",
-      initials: "MP",
-    },
-    {
-      teacherName: "Saurav Lokhande",
-      initials: "SL",
-    },
-    {
-      teacherName: "Mayank Satapara",
-      initials: "MS",
-    },
-    {
-      teacherName: "Nitish Patel",
-      initials: "NP",
-    },
-  ];
+  const q = query(collection(db, "Teachers"), where("email", "!=", null));
+  const [teacherData, setTeacherData] = useState([]);
+  const getData = async () => {
+    await getDocs(q)
+      .then((querySnapshot) => {
+        setTeacherData([]);
+        querySnapshot.forEach((doc) => {
+          setTeacherData((teacherData) => [
+            ...teacherData,
+            {
+              name: doc.data().name,
+              initials: doc
+                .data()
+                .name.split(" ")
+                .map((name) => name[0])
+                .join("")
+                .toUpperCase(),
+            },
+          ]);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+useEffect(()=>{
+getData();
+console.log(teacherData)
+},[])
 
   const years = Array.from(
     { length: 5 },
@@ -73,17 +79,64 @@ function Batch() {
     console.log(branch + yearOfAdmission + semester);
     console.log(subjects);
 
-    const colRef = collection(db, "batch");
-    console.log(colRef);
+    const batchRef =collection(db, "batch");
+    const classRef=collection(db,"attendance");
+    const teacherRef=collection(db,"Teachers");
+    console.log(batchRef);
     try {
-      const dataid = await addDoc(colRef, {
-        Branch: branch,
+      const dataid = await addDoc(batchRef, {
+        branch: branch,
         sem: semester,
         students: fileData,
         subjects: subjects,
         year: yearOfAdmission,
+      }).then(async (dataid) => {
+        console.log("Document written in batches with ID: ", dataid.id);
+        subjects.forEach(async (docer)=>{
+          console.log(docer);
+          const classData= await addDoc(classRef,{
+            branch: branch,
+            sem: semester,
+            year:yearOfAdmission,
+            subject:docer.subName,
+            teacher:docer.teacher,
+            data:[]
+
+          }).then(async (classData) => {
+            console.log("Document written in attendance with ID: ",classData.id);
+            const q = query(teacherRef, where("name", "==", docer.teacher));
+           
+
+            const querySnapshot = await getDocs(q);
+            console.log(querySnapshot);
+            const newData={
+              branch: branch,
+              sem: semester,
+              year:yearOfAdmission,
+              subject:docer.subName,
+              classId:classData.id,
+            }
+            querySnapshot.forEach(async (dock) => {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(dock.id, " => ", dock.data());
+              const washingtonRef = doc(db, "Teachers", dock.id);
+              await updateDoc(washingtonRef, {
+                classes: arrayUnion(newData)
+              });
+              console.log("class added FOR",docer.teacher)
+            });
+          }).catch((error)=>{
+            console.log("Error in adding attendance")
+            console.log(error);
+          })
+        })
+       
+      }).catch((error)=>{
+        console.log("Error in adding batch")
+        console.log(error);
       });
-      console.log("Document written with ID: ", dataid.id);
+      
+
     } catch (error) {
       console.log(error.message);
     }
@@ -160,8 +213,8 @@ function Batch() {
                   >
                     <option value="">Select Teacher</option>
                     {teacherData.map((teacher, key) => (
-                      <option key={key} value={teacher.teacherName}>
-                        {teacher.teacherName}({teacher.initials})
+                      <option key={key} value={teacher.name}>
+                        {teacher.name}({teacher.initials})
                       </option>
                     ))}
                   </select>

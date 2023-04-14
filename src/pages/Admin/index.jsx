@@ -6,9 +6,14 @@ import Link from "next/link";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/initFirebase";
 
+
+
 function AdminDash() {
+
   const q = query(collection(db, "Teachers"), where("email", "!=", null));
+  const q1 = query(collection(db, "batch"), where("branch", "!=", null));
   const [teacherData, setTeacherData] = useState([]);
+  const [batchData,setBatchData]=useState([]);
   const getData = async () => {
     await getDocs(q)
       .then((querySnapshot) => {
@@ -33,11 +38,33 @@ function AdminDash() {
       });
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  const getBatch = async () => {
+    await getDocs(q1)
+      .then((querySnapshot) => {
+        setBatchData([]);
+        querySnapshot.forEach((doc) => {
+          setBatchData((batchData) => [
+            ...batchData,
+            {
+              branch: doc.data().branch,
+              year:doc.data().year,
+              currentSem:doc.data().sem
+            },
+          ]);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+useEffect(()=>{
 
-  const batchData = [
+getData();
+getBatch();
+},[])
+ 
+
+  /* const batchData = [
     {
       branch: "ECE",
       year: 2019,
@@ -79,7 +106,7 @@ function AdminDash() {
       currentSem: 2,
     },
   ];
-
+ */
   /* const teacherData = [
     {
       name: "Jim Patel",
@@ -147,7 +174,7 @@ function AdminDash() {
                 </Link>
               </button>
             </div>
-            {teacherData.map((teacher, key) => (
+            {teacherData?.map((teacher, key) => (
               <div className={styles.teacherItem} key={key}>
                 {teacher.name} ({teacher.initials})
                 <IoIosArrowForward />
