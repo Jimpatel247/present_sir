@@ -1,4 +1,9 @@
-/* The switch - the box around the slider */
+.switchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .switch {
     font-size: 17px;
     position: relative;
@@ -7,14 +12,12 @@
     height: 2em;
 }
 
-/* Hide default HTML checkbox */
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -30,27 +33,85 @@
     border-radius: 5px;
 }
 
-/* 
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 1.4em;
-    width: 0.1em;
-    border-radius: 0px;
-    left: 0.3em;
-    bottom: 0.3em;
-    background-color: white;
-    transition: .4s;
-} */
 
 .switch input:focus+.slider {
-    outline: 1px solid #2196F3;
+    outline: 2px solid #2196F3;
 }
 
 input:checked+.slider {
     background-color: rgb(0, 234, 0);
 }
 
-/* input:checked+.slider:before {
-    transform: translateX(2.8em) rotate(360deg);
-} */
+
+.formContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+
+.form {
+    width: 100%;
+    /* padding: 1em;
+    background-color: var(--dark-blue-light-1);
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.412);
+    border-radius: 0.5em; */
+}
+
+
+.formContainer {
+    width: clamp(15rem, 100%, 95vw);
+    padding: 1em;
+    background-color: var(--dark-blue-light-1);
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.412);
+    border-radius: 0.2em;
+}
+
+.formContainer table {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.formContainer table tbody tr:nth-child(odd) {
+    background-color: var(--dark-blue-light-2);
+}
+
+.formContainer table td,
+.formContainer table th {
+    border: 1px solid black;
+    text-align: center;
+    padding: 1em;
+}
+
+@media screen and (max-width: 540px) {
+    .nameData {
+        display: none;
+    }
+
+}
+
+.btnCont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+
+.btnCont button {
+    color: white;
+    border: none;
+    background-color: var(--color-orange);
+    font-size: 1.2em;
+    padding: 0.4em .9em;
+    border-radius: 0.3em;
+    width: 10rem;
+    cursor: pointer;
+}
+
+.heading {
+    font-size: 1.5em;
+    color: var(--color-orange);
+    text-align: center;
+    margin-bottom: 1em;
+}

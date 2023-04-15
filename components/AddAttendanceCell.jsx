@@ -10,8 +10,8 @@ export default function AddAttendanceCell({
   return (
     <tr>
       <td>{en_no}</td>
-      <td>{name}</td>
-      <td>
+      <td className={styles.nameData}>{name}</td>
+      <td className={styles.switchContainer}>
         <label className={styles.switch} htmlFor={en_no}>
           <input
             type="checkbox"
