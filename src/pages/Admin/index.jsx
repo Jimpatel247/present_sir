@@ -57,6 +57,7 @@ function AdminDash() {
   useEffect(() => {
     getData();
     getBatch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

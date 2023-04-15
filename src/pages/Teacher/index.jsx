@@ -27,11 +27,11 @@ function TeacherDash() {
       // doc.data() is never undefined for query doc snapshots
       setclassData(doc.data().classes);
     });
-
   };
 
   useEffect(() => {
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
