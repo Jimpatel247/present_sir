@@ -117,6 +117,10 @@
     border-bottom: 1px solid var(--green-light-3);
 }
 
+.formGrp select option {
+    background-color: white;
+}
+
 
 .formGrp select option {
     color: black;
