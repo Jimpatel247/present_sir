@@ -2,6 +2,7 @@ import Head from "next/head";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/initFirebase";
 import { useAuth } from "context/AuthContext";
+
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -26,6 +27,7 @@ function TeacherDash() {
       // doc.data() is never undefined for query doc snapshots
       setclassData(doc.data().classes);
     });
+
   };
 
   useEffect(() => {

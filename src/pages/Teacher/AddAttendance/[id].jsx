@@ -1,6 +1,17 @@
 import { useRouter } from "next/router";
-import React from "react";
-
+import React, { useEffect } from "react";
+import { db, auth } from "../../../firebase/initFirebase";
+import {
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  query,
+  where,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 import styles from "../../../styles/teacher/addattendance.module.css";
 import AddAttendanceCell from "components/AddAttendanceCell";
 import Head from "next/head";
@@ -8,7 +19,72 @@ import Head from "next/head";
 export default function AddAttendance() {
   const router = useRouter();
   const { id } = router.query;
-  const [studentList, setStudentList] = React.useState([
+  const docRef = doc(db, "attendance", "2bG78VtuaAMuuzJ6y9dl");
+  const batchRef=collection(db,"batch");
+  const [studentList, setStudentList] = React.useState([]);
+  const getList = async () => {
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+      const q = query(
+        batchRef,
+        where("branch", "==", docSnap.data().branch),
+        where("sem", "==", docSnap.data().sem),
+        where("year", "==", docSnap.data().year),
+        where("students", "!=", null)
+      );
+      await getDocs(q)
+      .then((querySnapshot) => {
+        setStudentList([]);
+        querySnapshot.forEach((docer) => {
+          // console.log(docer.id, " => ", docer.data());
+          const students=docer.data().students;
+          setStudentList([]);
+          students.forEach((stu)=>{
+            setStudentList((studentData) => [
+              ...studentData,
+              {
+                en_no:stu.en_no,
+                name:stu.name,
+                isPresent:true
+              },
+            ]);
+          })
+          
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    } else {
+      // docSnap.data() will be undefined in this case
+      console.log("No such document!");
+    }
+  };
+  useEffect(() => {
+    getList();
+  }, []);
+
+  const handleCheckboxChange = (e) => {
+    const en_no = e.target.id;
+    const newStudentList = studentList.map((student) => {
+      if (student.en_no === en_no) {
+        return {
+          ...student,
+          isPresent: !student.isPresent,
+        };
+      }
+      return student;
+    });
+    setStudentList(newStudentList);
+  };
+
+  const uploadHandler = (e) => {
+    e.preventDefault();
+    console.log(studentList);
+  };
+
+  const temp=[
     {
       en_no: "UI20CS01",
       name: "Abhishek Kumar",
@@ -59,26 +135,7 @@ export default function AddAttendance() {
       name: "Ayush Kumar",
       isPresent: true,
     },
-  ]);
-
-  const handleCheckboxChange = (e) => {
-    const en_no = e.target.id;
-    const newStudentList = studentList.map((student) => {
-      if (student.en_no === en_no) {
-        return {
-          ...student,
-          isPresent: !student.isPresent,
-        };
-      }
-      return student;
-    });
-    setStudentList(newStudentList);
-  };
-
-  const uploadHandler = (e) => {
-    e.preventDefault();
-    console.log(studentList);
-  };
+  ]
   return (
     <>
       <Head>
