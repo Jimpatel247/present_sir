@@ -12,12 +12,11 @@ function TeacherDash() {
   const router = useRouter();
   const { currentUser } = useAuth();
   const [classData, setclassData] = useState([]);
-  if (currentUser == null) {
-    router.push("/auth/Login");
-    return;
-  }
 
   const getData = async () => {
+    if (currentUser == null) {
+      router.push("/auth/Login");
+    }
     const q = query(
       collection(db, "Teachers"),
       where("email", "==", currentUser.email)
