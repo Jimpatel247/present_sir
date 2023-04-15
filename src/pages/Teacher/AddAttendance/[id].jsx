@@ -83,7 +83,28 @@ export default function AddAttendance() {
 
   const uploadHandler = (e) => {
     e.preventDefault();
-    console.log(studentList);
+    const date=new Date();
+    console.log(date);
+    var absent=[];
+    studentList.forEach((stud)=>{
+        if(!(stud.isPresent)){
+          absent.push(stud.en_no);
+        }
+    })
+    console.log(absent);
+    const attenRef = doc(db, "attendance", id);
+    const newData={
+      absentNum:absent,
+      dateTime:date
+    }
+    console.log(newData)
+    const addData= async ()=>{
+      await updateDoc(attenRef, {
+        data: arrayUnion(newData)
+      });
+    }
+    addData();
+    console.log("successfully added attendance");
   };
 
   return (
