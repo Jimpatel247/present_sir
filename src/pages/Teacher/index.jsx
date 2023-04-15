@@ -1,30 +1,33 @@
 import Head from "next/head";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import {auth, db } from "@/firebase/initFirebase";
+import { auth, db } from "@/firebase/initFirebase";
 import { useAuth } from "context/AuthContext";
-import { useState,useEffect} from "react";
+
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+
+import styles from "../../styles/teacher/teacher.module.css";
+import Link from "next/link";
 
 function TeacherDash() {
   const router = useRouter();
-  const {currentUser } = useAuth();
-  if(!currentUser){
-    alert("Plese Login");
-    router.push("/auth/Login");
-  }
-  
-    const q = query(collection(db, "Teachers"), where("email", "==", currentUser.email));
-    console.log(currentUser);
-    const [classData, setclassData] = useState([]);
-    const getData = async () => {
-      const querySnapshot = await getDocs(q);
-      console.log("isi")
-      querySnapshot.forEach((doc) => {
-    // doc.data() is never undefined for query doc snapshots
-    console.log(doc.id, " => ", doc.data().classes);
-  });
-  
-  
+  const { currentUser } = useAuth();
+  const [classData, setclassData] = useState([]);
+
+  const getData = async () => {
+    if (currentUser == null) {
+      router.push("/auth/Login");
+    }
+    const q = query(
+      collection(db, "Teachers"),
+      where("email", "==", currentUser.email)
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      setclassData(doc.data().classes);
+    });
+
   };
 
   useEffect(() => {
@@ -34,10 +37,19 @@ function TeacherDash() {
     <>
       <Head>
         <title>Teachers Dashboard</title>
-        
       </Head>
 
-      <div className="page-container">Teacher Dashboard</div>
+      <div className="page-container">
+        <div className={styles.links}>
+          {classData.map((item, key) => {
+            return (
+              <Link key={key} href={`/Teacher/AddAttendance/${item.classId}`}>
+                {item.sem}th sem {item.branch} {item.year}
+              </Link>
+            );
+          })}
+        </div>
+      </div>
     </>
   );
 }

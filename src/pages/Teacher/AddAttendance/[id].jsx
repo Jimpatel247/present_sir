@@ -14,6 +14,7 @@ import {
 } from "firebase/firestore";
 import styles from "../../../styles/teacher/addattendance.module.css";
 import AddAttendanceCell from "components/AddAttendanceCell";
+import Head from "next/head";
 
 export default function AddAttendance() {
   const router = useRouter();
@@ -136,8 +137,10 @@ export default function AddAttendance() {
     },
   ]
   return (
-    <div>
-      {id}
+    <>
+      <Head>
+        <title>Add Attendance</title>
+      </Head>
       <div className={styles.formContainer}>
         <form onSubmit={uploadHandler}>
           <table>
@@ -163,6 +166,6 @@ export default function AddAttendance() {
           <button type="submit">Upload</button>
         </form>
       </div>
-    </div>
+    </>
   );
 }
