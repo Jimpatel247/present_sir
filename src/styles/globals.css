@@ -1,85 +1,88 @@
-:root {
-  --color-dark-blue: #1E2945;
-  --color-dark-red: #321A30;
-  --color-orange: #F67E64;
-  --color-purple: #685CB5;
-  --color-green: #0AD774;
+  @import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
+
+  :root {
+    --color-dark-blue: #1E2945;
+    --color-dark-red: #321A30;
+    --color-orange: #F67E64;
+    --color-purple: #685CB5;
+    --color-green: #0AD774;
 
 
-  --dark-blue-dark-5: #0f1526;
-  --dark-blue-dark-4: #121831;
-  --dark-blue-dark-3: #141d3c;
-  --dark-blue-dark-2: #172248;
-  --dark-blue-dark-1: #1a2b53;
-  --dark-blue-light-1: #1f345e;
-  --dark-blue-light-2: #244069;
-  --dark-blue-light-3: #294b74;
-  --dark-blue-light-4: #2d547f;
-  --dark-blue-light-5: #315d8b;
-  --dark-red-dark-5: #160a16;
-  --dark-red-dark-4: #1a0d1c;
-  --dark-red-dark-3: #1e0f23;
-  --dark-red-dark-2: #22122a;
-  --dark-red-dark-1: #251531;
-  --dark-red-light-1: #2a1837;
-  --dark-red-light-2: #2e1a3e;
-  --dark-red-light-3: #321d44;
-  --dark-red-light-4: #361f4b;
-  --dark-red-light-5: #3a224f;
-  --orange-dark-5: #c9604c;
-  --orange-dark-4: #d06b5c;
-  --orange-dark-3: #d6776c;
-  --orange-dark-2: #df8381;
-  --orange-dark-1: #e79095;
-  --orange-light-1: #f28c7c;
-  --orange-light-2: #f69b8e;
-  --orange-light-3: #f9a9a0;
-  --orange-light-4: #fcc7ba;
-  --orange-light-5: #ffe5d5;
-  --purple-dark-5: #4d448a;
-  --purple-dark-4: #352f5f;
-  --purple-dark-3: #1f1a34;
-  --purple-dark-2: #0e081d;
-  --purple-dark-1: #000000;
-  --purple-light-1: #7e73c0;
-  --purple-light-2: #9d92d3;
-  --purple-light-3: #bcb2e6;
-  --purple-light-4: #dbd7f9;
-  --purple-light-5: #ffffff;
-  --green-dark-5: #0aaf65;
-  --green-dark-4: #097e4d;
-  --green-dark-3: #065b35;
-  --green-dark-2: #03381d;
-  --green-dark-1: #000000;
-  --green-light-1: #1ee38a;
-  --green-light-2: #4ef5a5;
-  --green-light-3: #7dffbf;
-  --green-light-4: #adffda;
-  --green-light-5: #ffffff;
-}
+    --dark-blue-dark-5: #0f1526;
+    --dark-blue-dark-4: #121831;
+    --dark-blue-dark-3: #141d3c;
+    --dark-blue-dark-2: #172248;
+    --dark-blue-dark-1: #1a2b53;
+    --dark-blue-light-1: #1f345e;
+    --dark-blue-light-2: #244069;
+    --dark-blue-light-3: #294b74;
+    --dark-blue-light-4: #2d547f;
+    --dark-blue-light-5: #315d8b;
+    --dark-red-dark-5: #160a16;
+    --dark-red-dark-4: #1a0d1c;
+    --dark-red-dark-3: #1e0f23;
+    --dark-red-dark-2: #22122a;
+    --dark-red-dark-1: #251531;
+    --dark-red-light-1: #2a1837;
+    --dark-red-light-2: #2e1a3e;
+    --dark-red-light-3: #321d44;
+    --dark-red-light-4: #361f4b;
+    --dark-red-light-5: #3a224f;
+    --orange-dark-5: #c9604c;
+    --orange-dark-4: #d06b5c;
+    --orange-dark-3: #d6776c;
+    --orange-dark-2: #df8381;
+    --orange-dark-1: #e79095;
+    --orange-light-1: #f28c7c;
+    --orange-light-2: #f69b8e;
+    --orange-light-3: #f9a9a0;
+    --orange-light-4: #fcc7ba;
+    --orange-light-5: #ffe5d5;
+    --purple-dark-5: #4d448a;
+    --purple-dark-4: #352f5f;
+    --purple-dark-3: #1f1a34;
+    --purple-dark-2: #0e081d;
+    --purple-dark-1: #000000;
+    --purple-light-1: #7e73c0;
+    --purple-light-2: #9d92d3;
+    --purple-light-3: #bcb2e6;
+    --purple-light-4: #dbd7f9;
+    --purple-light-5: #ffffff;
+    --green-dark-5: #0aaf65;
+    --green-dark-4: #097e4d;
+    --green-dark-3: #065b35;
+    --green-dark-2: #03381d;
+    --green-dark-1: #000000;
+    --green-light-1: #1ee38a;
+    --green-light-2: #4ef5a5;
+    --green-light-3: #7dffbf;
+    --green-light-4: #adffda;
+    --green-light-5: #ffffff;
+  }
 
-::-webkit-scrollbar {
-  display: none;
-}
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
-html {
-  font-family: 'Roboto', sans-serif;
-  background-color: var(--dark-blue-dark-3);
-  color: white;
-}
+  html {
+    font-family: 'Unbounded', cursive;
+    background-color: var(--dark-blue-dark-3);
+    color: rgb(234, 234, 234);
+  }
 
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 
-.page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  max-width: 100vw;
-  padding: 1em;
-}
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 100vw;
+    overflow-x: scroll;
+    padding: 1em;
+  }

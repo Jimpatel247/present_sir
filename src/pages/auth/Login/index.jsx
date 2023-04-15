@@ -63,6 +63,7 @@ function Login() {
                 <Image
                   src="/teacher.svg"
                   alt="Professor"
+                  priority
                   width={150}
                   height={150}
                 />
@@ -114,6 +115,7 @@ function Login() {
                   src="/teacher.svg"
                   alt="Admin"
                   width={150}
+                  priority
                   height={150}
                 />
                 <h2>Admin Login</h2>

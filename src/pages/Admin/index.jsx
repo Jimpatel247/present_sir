@@ -6,14 +6,11 @@ import Link from "next/link";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/initFirebase";
 
-
-
 function AdminDash() {
-
   const q = query(collection(db, "Teachers"), where("email", "!=", null));
   const q1 = query(collection(db, "batch"), where("branch", "!=", null));
   const [teacherData, setTeacherData] = useState([]);
-  const [batchData,setBatchData]=useState([]);
+  const [batchData, setBatchData] = useState([]);
   const getData = async () => {
     await getDocs(q)
       .then((querySnapshot) => {
@@ -47,8 +44,8 @@ function AdminDash() {
             ...batchData,
             {
               branch: doc.data().branch,
-              year:doc.data().year,
-              currentSem:doc.data().sem
+              year: doc.data().year,
+              currentSem: doc.data().sem,
             },
           ]);
         });
@@ -57,74 +54,11 @@ function AdminDash() {
         console.log(error);
       });
   };
-useEffect(()=>{
+  useEffect(() => {
+    getData();
+    getBatch();
+  }, []);
 
-getData();
-getBatch();
-},[])
- 
-
-  /* const batchData = [
-    {
-      branch: "ECE",
-      year: 2019,
-      currentSem: 8,
-    },
-    {
-      branch: "CSE",
-      year: 2019,
-      currentSem: 8,
-    },
-    {
-      branch: "ECE",
-      year: 2020,
-      currentSem: 6,
-    },
-    {
-      branch: "CSE",
-      year: 2020,
-      currentSem: 6,
-    },
-    {
-      branch: "ECE",
-      year: 2021,
-      currentSem: 4,
-    },
-    {
-      branch: "CSE",
-      year: 2021,
-      currentSem: 4,
-    },
-    {
-      branch: "ECE",
-      year: 2022,
-      currentSem: 2,
-    },
-    {
-      branch: "CSE",
-      year: 2022,
-      currentSem: 2,
-    },
-  ];
- */
-  /* const teacherData = [
-    {
-      name: "Jim Patel",
-      initials: "JP",
-    },
-    {
-      name: "Manan Patel",
-      initials: "MP",
-    },
-    {
-      name: "Saurav Lokhande",
-      initials: "SL",
-    },
-    {
-      name: "Mayank Satapara",
-      initials: "MS",
-    },
-  ]; */
   return (
     <>
       <Head>
@@ -141,6 +75,7 @@ getBatch();
                 </Link>
               </button>
             </div>
+            {/* <Skeleton n={5} /> */}
             {batchData.map((batch, key) => (
               <div className={styles.batchItem} key={key}>
                 <div className={styles.batchdata}>
@@ -174,6 +109,7 @@ getBatch();
                 </Link>
               </button>
             </div>
+            {/* <Skeleton n={5} /> */}
             {teacherData?.map((teacher, key) => (
               <div className={styles.teacherItem} key={key}>
                 {teacher.name} ({teacher.initials})
@@ -188,3 +124,18 @@ getBatch();
 }
 
 export default AdminDash;
+
+function Skeleton({ n }) {
+  return (
+    <>
+      {Array(n)
+        .fill()
+        .map((_, i) => (
+          <div className={styles.skeletonItem} key={i}>
+            <div className={styles.skeleton}></div>
+            <IoIosArrowForward />
+          </div>
+        ))}
+    </>
+  );
+}
