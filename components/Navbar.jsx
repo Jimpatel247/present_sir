@@ -39,21 +39,8 @@ function Navbar() {
             <Link onClick={() => setActive(!active)} href={"/Admin"}>
               Admin DashBoard
             </Link>
-            <Link
-              onClick={() => setActive(!active)}
-              className={styles.lastLink}
-              href={"/auth/Login"}
-            >
-              Login
-            </Link>
           </div>
           <div className={styles.linkGrp}>
-            <Link onClick={() => setActive(!active)} href={"/auth/Login"}>
-              Login
-            </Link>
-            <Link onClick={() => setActive(!active)} href={"/auth/Login"}>
-              Login
-            </Link>
             <Link
               onClick={() => setActive(!active)}
               className={styles.lastLink}

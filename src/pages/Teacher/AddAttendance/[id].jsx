@@ -19,11 +19,13 @@ import Head from "next/head";
 export default function AddAttendance() {
   const router = useRouter();
   const { id } = router.query;
-  const docRef = doc(db, "attendance", "2bG78VtuaAMuuzJ6y9dl");
+  const docRef = doc(db, "attendance", id);
   const batchRef = collection(db, "batch");
   const [studentList, setStudentList] = React.useState([]);
+  const [batchName, setBatchName] = React.useState("");
   const getList = async () => {
     const docSnap = await getDoc(docRef);
+    setBatchName(docSnap.data().sem + "th Sem " + docSnap.data().branch);
     if (docSnap.exists()) {
       console.log("Document data:", docSnap.data());
       const q = query(
@@ -84,87 +86,42 @@ export default function AddAttendance() {
     console.log(studentList);
   };
 
-  const temp = [
-    {
-      en_no: "UI20CS01",
-      name: "Abhishek Kumar",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS02",
-      name: "Aditya Rathore ",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS03",
-      name: "Akhil Sharma",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS04",
-      name: "Alok Kumar",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS05",
-      name: "Aman Garg",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS06",
-      name: "Anirudh Paliwal ",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS07",
-      name: "Ankit Baghel",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS08",
-      name: "Anshika Agarwal",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS09",
-      name: "Aryaman Gurjar",
-      isPresent: true,
-    },
-    {
-      en_no: "UI20CS10",
-      name: "Ayush Kumar",
-      isPresent: true,
-    },
-  ];
   return (
     <>
       <Head>
         <title>Add Attendance</title>
       </Head>
-      <div className={styles.formContainer}>
-        <form onSubmit={uploadHandler}>
-          <table>
-            <thead>
-              <tr>
-                <th>Enrollment No.</th>
-                <th>Name</th>
-                <th>Attendance</th>
-              </tr>
-            </thead>
-            <tbody>
-              {studentList.map((student, key) => (
-                <AddAttendanceCell
-                  key={key}
-                  en_no={student.en_no}
-                  name={student.name}
-                  isChecked={student.isPresent}
-                  handleCheckboxChange={handleCheckboxChange}
-                />
-              ))}
-            </tbody>
-          </table>
-          <button type="submit">Upload</button>
-        </form>
+      <div className="page-container">
+        <h2 className={styles.heading}>{batchName}</h2>
+        <div className={styles.formContainer}>
+          <form className={styles.form} onSubmit={uploadHandler}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Enrollment No.</th>
+                  <th className={styles.nameData}>Name</th>
+                  <th>Attendance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {studentList.map((student, key) => (
+                  <AddAttendanceCell
+                    key={key}
+                    en_no={student.en_no}
+                    name={student.name}
+                    isChecked={student.isPresent}
+                    handleCheckboxChange={handleCheckboxChange}
+                  />
+                ))}
+              </tbody>
+            </table>
+            <div className={styles.btnCont}>
+              <button className={styles.btn} type="submit">
+                Upload
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );
