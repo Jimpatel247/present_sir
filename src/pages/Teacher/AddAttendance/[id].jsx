@@ -20,7 +20,7 @@ export default function AddAttendance() {
   const router = useRouter();
   const { id } = router.query;
   const docRef = doc(db, "attendance", "2bG78VtuaAMuuzJ6y9dl");
-  const batchRef=collection(db,"batch");
+  const batchRef = collection(db, "batch");
   const [studentList, setStudentList] = React.useState([]);
   const getList = async () => {
     const docSnap = await getDoc(docRef);
@@ -34,28 +34,27 @@ export default function AddAttendance() {
         where("students", "!=", null)
       );
       await getDocs(q)
-      .then((querySnapshot) => {
-        setStudentList([]);
-        querySnapshot.forEach((docer) => {
-          // console.log(docer.id, " => ", docer.data());
-          const students=docer.data().students;
+        .then((querySnapshot) => {
           setStudentList([]);
-          students.forEach((stu)=>{
-            setStudentList((studentData) => [
-              ...studentData,
-              {
-                en_no:stu.en_no,
-                name:stu.name,
-                isPresent:true
-              },
-            ]);
-          })
-          
+          querySnapshot.forEach((docer) => {
+            // console.log(docer.id, " => ", docer.data());
+            const students = docer.data().students;
+            setStudentList([]);
+            students.forEach((stu) => {
+              setStudentList((studentData) => [
+                ...studentData,
+                {
+                  en_no: stu.en_no,
+                  name: stu.name,
+                  isPresent: true,
+                },
+              ]);
+            });
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
     } else {
       // docSnap.data() will be undefined in this case
       console.log("No such document!");
@@ -63,6 +62,7 @@ export default function AddAttendance() {
   };
   useEffect(() => {
     getList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCheckboxChange = (e) => {
@@ -84,7 +84,7 @@ export default function AddAttendance() {
     console.log(studentList);
   };
 
-  const temp=[
+  const temp = [
     {
       en_no: "UI20CS01",
       name: "Abhishek Kumar",
@@ -135,7 +135,7 @@ export default function AddAttendance() {
       name: "Ayush Kumar",
       isPresent: true,
     },
-  ]
+  ];
   return (
     <>
       <Head>
