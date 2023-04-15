@@ -16,11 +16,12 @@ function TeacherDash() {
     router.push("/auth/Login");
     return;
   }
-  const q = query(
-    collection(db, "Teachers"),
-    where("email", "==", currentUser.email)
-  );
+
   const getData = async () => {
+    const q = query(
+      collection(db, "Teachers"),
+      where("email", "==", currentUser.email)
+    );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
