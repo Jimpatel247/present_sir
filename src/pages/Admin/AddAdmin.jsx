@@ -1,12 +1,12 @@
 import React from "react";
 import Head from "next/head";
-import { useEffect, useRef, useState } from "react";
+import {  useState } from "react";
 import Image from "next/image";
 
 import { useRouter } from "next/router";
 import { auth, db } from "@/firebase/initFirebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, collection, addDoc, query, where } from "firebase/firestore";
+import {  collection, addDoc} from "firebase/firestore";
 
 import styles from "../../styles/login.module.css";
 
@@ -103,48 +103,6 @@ export default function AddAdmin() {
                 </div>
               </form>
             </div>
-            {/*  <div ref={admin} className={styles.admin}>
-                <form>
-                  <img src="/teacher.svg" alt="Admin" />
-                  <h2>Admin Login</h2>
-                  <div className={styles.fields}>
-                    <div className={styles.inputGrp}>
-                      <input
-                        className={styles.emailInput}
-                        onChange={(e)=>setAdminEmail(e.target.value)}
-                        value={adminEmail}
-                        type="text"
-                        id="email"
-                        required
-                      />
-                      <label htmlFor="email" className={styles.emailLabel}>
-                        Email
-                      </label>
-                    </div>
-                    <div className={styles.inputGrp}>
-                      <input
-                        className={styles.passInput}
-                        onChange={(e)=>setAdminPassword(e.target.value)}
-                        value={adminPassword}
-                        type="password"
-                        id="password"
-                        required
-                      />
-                      <label className={styles.passLabel} htmlFor="password">
-                        Password
-                      </label>
-                    </div>
-                    <input
-                      className={styles.submitBtn}
-                      type="submit"
-                      value="LOGIN"
-                    />
-                    <p className={styles.changeUserLink} onClick={changeUser}>
-                      Login as Teacher
-                    </p>
-                  </div>
-                </form>
-              </div> */}
           </div>
         </div>
       </div>
