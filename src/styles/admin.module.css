@@ -89,19 +89,3 @@
         display: block;
     }
 }
-
-.skeletonItem {
-    background-color: var(--dark-blue-light-2);
-    cursor: pointer;
-    border-radius: 7px;
-    padding: 0.5em;
-}
-
-.skeleton {
-    border-radius: 0.2em;
-    height: 1.2em;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}

@@ -1,5 +1,21 @@
+.container {
+    display: grid;
+    width: 98vw;
+    grid-template-columns: 5fr 3fr;
+    padding: 2.5vh 2.5vw;
+    background-color: var(--color-dark-blue);
+    gap: 1em;
+}
+
 .links {
     text-decoration: none;
     display: flex;
     flex-direction: column;
+    width: 160%;
+}
+
+.links>* {
+    text-decoration: none;
+    color: white;
+    width: 100%;
 }
