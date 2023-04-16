@@ -5,6 +5,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/initFirebase";
+import BatchCell, { Skeleton } from "components/BatchCell";
 
 function AdminDash() {
   const q = query(collection(db, "Teachers"), where("email", "!=", null));
@@ -76,19 +77,13 @@ function AdminDash() {
                 </Link>
               </button>
             </div>
-            {/* <Skeleton n={5} /> */}
             {batchData.map((batch, key) => (
-              <div className={styles.batchItem} key={key}>
-                <div className={styles.batchdata}>
-                  <div className={styles.batchItem__year}>
-                    {batch.branch}({batch.year})
-                  </div>
-                  <div className={styles.batchItem__sem}>
-                    {batch.currentSem}th Sem
-                  </div>
-                </div>
-                <IoIosArrowForward />
-              </div>
+              <BatchCell
+                key={key}
+                currentSem={batch.currentSem}
+                year={batch.year}
+                branch={batch.branch}
+              />
             ))}
           </div>
           <div className={styles.sem}>
@@ -125,18 +120,3 @@ function AdminDash() {
 }
 
 export default AdminDash;
-
-function Skeleton({ n }) {
-  return (
-    <>
-      {Array(n)
-        .fill()
-        .map((_, i) => (
-          <div className={styles.skeletonItem} key={i}>
-            <div className={styles.skeleton}></div>
-            <IoIosArrowForward />
-          </div>
-        ))}
-    </>
-  );
-}

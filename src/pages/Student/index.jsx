@@ -37,12 +37,12 @@ export default function Student() {
                 <div className={styles.inputGrp}>
                   <input
                     className={styles.input}
-                    type="number"
+                    type="text"
                     id="rollNo"
                     required
                   />
                   <label htmlFor="rollNo" className={styles.inputLabel}>
-                    Roll No.
+                    Roll No.(UIXXECXX)
                   </label>
                 </div>
                 <div className={styles.inputGrp}>

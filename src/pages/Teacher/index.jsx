@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 
 import styles from "../../styles/teacher/teacher.module.css";
 import Link from "next/link";
+import BatchCell from "components/BatchCell";
+import { Skeleton } from "components/BatchCell";
 
 function TeacherDash() {
   const router = useRouter();
@@ -40,14 +42,20 @@ function TeacherDash() {
       </Head>
 
       <div className="page-container">
-        <div className={styles.links}>
-          {classData.map((item, key) => {
-            return (
-              <Link key={key} href={`/Teacher/AddAttendance/${item.classId}`}>
-                {item.sem}th sem {item.branch} {item.year}
-              </Link>
-            );
-          })}
+        <div className={styles.container}>
+          <div className={styles.links}>
+            {classData.map((item, key) => {
+              return (
+                <Link key={key} href={`/Teacher/AddAttendance/${item.classId}`}>
+                  <BatchCell
+                    currentSem={item.sem}
+                    branch={item.branch}
+                    year={item.year}
+                  />
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
