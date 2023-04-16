@@ -1,0 +1,15 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 98vw;
+    padding: 2.5vh 2.5vw;
+    background-color: var(--color-dark-blue);
+    border-radius: 0.3rem;
+    gap: 1em;
+}
+
+.heading {
+    color: var(--color-green);
+    margin-bottom: 1rem;
+}

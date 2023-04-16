@@ -1,18 +1,21 @@
+import ShowAttendanceCell from "components/ShowAttendanceCell";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+
+import styles from "../../styles/student/showAttendance.module.css";
 
 export default function CheckAttendance() {
   const data = [
     {
       subject: "VLSI",
       total: 50,
-      attended: 40,
+      attended: 50,
     },
     {
       subject: "Microprocessor",
       total: 50,
-      attended: 30,
+      attended: 18,
     },
     {
       subject: "Computer Networks",
@@ -43,6 +46,17 @@ export default function CheckAttendance() {
       <Head>
         <title>My Attendance</title>
       </Head>
+      <h2 className={styles.heading}>My Attendance</h2>
+      <div className={styles.container}>
+        {data.map((item, key) => (
+          <ShowAttendanceCell
+            key={key}
+            subject={item.subject}
+            attended={item.attended}
+            total={item.total}
+          />
+        ))}
+      </div>
     </div>
   );
 }

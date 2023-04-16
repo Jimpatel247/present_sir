@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 
-import styles from "../../styles/student.module.css";
+import styles from "../../styles/student/student.module.css";
 import { useRouter } from "next/router";
 import { Player } from "@lottiefiles/react-lottie-player";
 

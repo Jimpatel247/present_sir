@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "../../styles/admin.module.css";
+import styles from "../../styles/admin/admin.module.css";
 import { IoIosArrowForward } from "react-icons/io";
 import Head from "next/head";
 import Link from "next/link";
