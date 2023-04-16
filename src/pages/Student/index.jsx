@@ -29,14 +29,9 @@ export default function Student() {
         <div className={styles.container}>
           <div className={styles.form}>
             <form onSubmit={submitHandler}>
-              {/* <div className={styles.lottie}>
-                <Player
-                  autoplay
-                  loop
-                  src="/student.json"
-                  style={{ height: "40%", aspectRatio: "1/1" }}
-                ></Player>
-              </div> */}
+              <div className={styles.lottie}>
+                <Player autoplay loop src="/student.json"></Player>
+              </div>
               <h2>Check Attendance</h2>
               <div className={styles.fields}>
                 <div className={styles.inputGrp}>

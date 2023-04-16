@@ -37,6 +37,18 @@
     height: 100%;
 }
 
+.lottie {
+    display: block;
+    position: relative;
+    height: 30%;
+    margin-top: 1em;
+}
+
+.lottie * {
+    height: 100%;
+    width: 100%;
+}
+
 .teacher>form,
 .admin>form {
     display: flex;

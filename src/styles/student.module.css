@@ -18,6 +18,8 @@
 .lottie {
     display: block;
     position: relative;
+    width: 40%;
+    aspect-ratio: 1/1;
 }
 
 
@@ -39,6 +41,7 @@
 .form>form h2 {
     flex: 1;
     display: flex;
+    font-size: min(1.7rem, 5vw);
     align-items: center;
 }
 
@@ -57,7 +60,7 @@
 .inputGrp {
     position: relative;
     width: 100%;
-    /* outline: 1px solid red; */
+    font-size: min(1rem, 4vw);
 }
 
 .input,
@@ -91,7 +94,6 @@
     cursor: text;
     top: 0;
     left: 0;
-    font-size: 0.9em;
     transform: translate(0.7em, 0.7em);
     transition: transform 0.2s;
 }
