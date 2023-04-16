@@ -19,7 +19,7 @@ export default function CheckAttendance() {
       !formData.admissionYr
     ) {
       router.push("/Student");
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="page-container">
