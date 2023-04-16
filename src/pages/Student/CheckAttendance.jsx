@@ -3,6 +3,23 @@ import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
 export default function CheckAttendance() {
+  const data = [
+    {
+      subject: "VLSI",
+      total: 50,
+      attended: 40,
+    },
+    {
+      subject: "Microprocessor",
+      total: 50,
+      attended: 30,
+    },
+    {
+      subject: "Computer Networks",
+      total: 50,
+      attended: 36,
+    },
+  ];
   const router = useRouter();
   const formData = {
     rollNo: sessionStorage.getItem("rollNo"),

@@ -6,23 +6,6 @@ import { useRouter } from "next/router";
 import { Player } from "@lottiefiles/react-lottie-player";
 
 export default function Student() {
-  const data = [
-    {
-      subject: "VLSI",
-      total: 50,
-      attended: 40,
-    },
-    {
-      subject: "Microprocessor",
-      total: 50,
-      attended: 30,
-    },
-    {
-      subject: "Computer Networks",
-      total: 50,
-      attended: 36,
-    },
-  ];
   const router = useRouter();
   const years = Array.from(
     { length: 5 },
