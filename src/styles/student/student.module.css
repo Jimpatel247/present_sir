@@ -41,6 +41,7 @@
 .form>form h2 {
     flex: 1;
     display: flex;
+    color: var(--color-green);
     font-size: min(1.7rem, 5vw);
     align-items: center;
 }

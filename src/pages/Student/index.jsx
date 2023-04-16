@@ -1,28 +1,11 @@
 import React from "react";
 import Head from "next/head";
 
-import styles from "../../styles/student.module.css";
+import styles from "../../styles/student/student.module.css";
 import { useRouter } from "next/router";
 import { Player } from "@lottiefiles/react-lottie-player";
 
 export default function Student() {
-  const data = [
-    {
-      subject: "VLSI",
-      total: 50,
-      attended: 40,
-    },
-    {
-      subject: "Microprocessor",
-      total: 50,
-      attended: 30,
-    },
-    {
-      subject: "Computer Networks",
-      total: 50,
-      attended: 36,
-    },
-  ];
   const router = useRouter();
   const years = Array.from(
     { length: 5 },
