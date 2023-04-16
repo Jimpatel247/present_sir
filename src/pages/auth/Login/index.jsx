@@ -5,6 +5,7 @@ import { useAuth } from "context/AuthContext";
 import { useRouter } from "next/router";
 import { db } from "@/firebase/initFirebase";
 import Image from "next/image";
+import { Player } from "@lottiefiles/react-lottie-player";
 
 function Login() {
   const router = useRouter();
@@ -111,13 +112,9 @@ function Login() {
             </div>
             <div ref={admin} className={styles.admin}>
               <form>
-                <Image
-                  src="/teacher.svg"
-                  alt="Admin"
-                  width={150}
-                  priority
-                  height={150}
-                />
+                <div className={styles.lottie}>
+                  <Player autoplay loop src="/adminJSON.json"></Player>
+                </div>
                 <h2>Admin Login</h2>
                 <div className={styles.fields}>
                   <div className={styles.inputGrp}>

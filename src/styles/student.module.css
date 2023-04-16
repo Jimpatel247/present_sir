@@ -7,50 +7,23 @@
     border-radius: 10px;
 }
 
-.box {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    position: relative;
-    transition: 0.5s;
-}
 
 
-.teacher {
+.form {
     display: block;
-    position: absolute;
     width: 100%;
-    left: 0%;
-    height: 100%;
-    transition: 0.5s;
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.admin {
-    display: block;
-    left: 100%;
-    position: absolute;
-    width: 100%;
-    transition: 0.5s;
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
     height: 100%;
 }
 
 .lottie {
     display: block;
     position: relative;
-    height: 30%;
-    margin-top: 1em;
+    width: 40%;
+    aspect-ratio: 1/1;
 }
 
-.lottie * {
-    height: 100%;
-    width: 100%;
-}
 
-.teacher>form,
-.admin>form {
+.form>form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,17 +32,16 @@
     width: 100%;
 }
 
-.teacher img,
-.admin img {
+.form img {
     max-height: 30%;
     margin: 5%;
     mix-blend-mode: lighten;
 }
 
-.teacher>form h2,
-.admin>form h2 {
+.form>form h2 {
     flex: 1;
     display: flex;
+    font-size: min(1.7rem, 5vw);
     align-items: center;
 }
 
@@ -88,11 +60,13 @@
 .inputGrp {
     position: relative;
     width: 100%;
+    font-size: min(1rem, 4vw);
 }
 
-.emailInput,
-.passInput {
-    padding: .7em;
+.input,
+.inputGrp select {
+    padding: 0.7em;
+    font-family: 'Unbounded', cursive;
     width: 100%;
     border: 2px solid transparent;
     border-radius: 4px;
@@ -101,38 +75,39 @@
     border-bottom: 2px solid gray;
 }
 
-.inputGrp input:focus {
+.inputGrp select *:not(:disabled) {
+    color: black;
+}
+
+
+.inputGrp select:valid:not(:disabled),
+.inputGrp select:valid:not(:disabled):focus {
+    border: 2px solid var(--color-orange);
+}
+
+.inputGrp input:focus-visible {
     outline: none;
 }
 
-.emailLabel,
-.passLabel {
+.inputLabel {
     position: absolute;
     cursor: text;
     top: 0;
     left: 0;
-    font-size: 0.9em;
     transform: translate(0.7em, 0.7em);
     transition: transform 0.2s;
 }
 
-.emailInput:focus+.emailLabel,
-.emailInput:valid+.emailLabel,
-.passInput:focus+.passLabel,
-.passInput:valid+.passLabel {
+.input:focus+.inputLabel,
+.input:valid+.inputLabel {
     transform: translate(0.3em, -0.6em) scale(0.8);
     color: var(--color-orange);
     padding-inline: 5px;
     background-color: #2e3c62;
 }
 
-.passInput:focus+.passLabel,
-.passInput:valid+.passLabel {
-    transform: translate(0.1em, -0.6em) scale(0.8);
-}
 
-.emailInput:is(:focus, :valid),
-.passInput:is(:focus, :valid) {
+.input:is(:focus, :valid) {
     border: 2px solid var(--color-orange);
 }
 
@@ -144,9 +119,4 @@
     background-color: var(--color-orange);
     cursor: pointer;
     width: 70%;
-}
-
-.changeUserLink {
-    cursor: pointer;
-    text-decoration: underline;
 }

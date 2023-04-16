@@ -43,10 +43,17 @@ function Navbar() {
           <div className={styles.linkGrp}>
             <Link
               onClick={() => setActive(!active)}
-              className={styles.lastLink}
+              // className={styles.lastLink}
               href={"/auth/Login"}
             >
               Login
+            </Link>
+            <Link
+              onClick={() => setActive(!active)}
+              className={styles.lastLink}
+              href={"/Student"}
+            >
+              Student
             </Link>
           </div>
         </div>
