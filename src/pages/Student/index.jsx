@@ -49,8 +49,8 @@ export default function Student() {
                     <option value="" selected disabled>
                       Select Branch
                     </option>
-                    <option value="cse">CSE</option>
-                    <option value="ece">ECE</option>
+                    <option value="CSE">CSE</option>
+                    <option value="ECE">ECE</option>
                   </select>
                 </div>
                 <div className={styles.inputGrp}>
