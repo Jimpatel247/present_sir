@@ -1,6 +1,10 @@
 import Head from "next/head";
 import { Inter } from "@next/font/google";
 
+import styles from "../styles/home.module.css";
+import { Player } from "@lottiefiles/react-lottie-player";
+import Link from "next/link";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -12,6 +16,31 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className="page-container">
+        <div className={styles.section}>
+          <div className={styles.text}>
+            <p>
+              <span className={styles.bigText}>
+                <span className={styles.highlightGreen}>Attendance</span>{" "}
+                tracking made simple.
+              </span>
+              <span className={styles.smallText}>
+                Check your progress in{" "}
+                <span className={styles.highlightPurple}>real-time</span> with
+                our platform.
+              </span>
+            </p>
+            <div className={styles.buttonContainer}>
+              <Link href={"/Student"}>
+                <button>Check</button>
+              </Link>
+            </div>
+          </div>
+          <div className={styles.lottie}>
+            <Player autoplay keepLastFrame src="/club.json"></Player>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

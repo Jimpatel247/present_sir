@@ -18,17 +18,28 @@ function TeacherDash() {
 
   const getData = async () => {
     if (currentUser == null) {
+      toast.info("Please Login to continue", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       router.push("/auth/Login");
+    } else {
+      const q = query(
+        collection(db, "Teachers"),
+        where("email", "==", currentUser.email)
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        setclassData(doc.data().classes);
+      });
     }
-    const q = query(
-      collection(db, "Teachers"),
-      where("email", "==", currentUser.email)
-    );
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      setclassData(doc.data().classes);
-    });
   };
 
   useEffect(() => {
@@ -42,6 +53,7 @@ function TeacherDash() {
       </Head>
 
       <div className="page-container">
+        <h1 className={styles.heading}>My Classes</h1>
         <div className={styles.container}>
           <div className={styles.links}>
             {classData.map((item, key) => {

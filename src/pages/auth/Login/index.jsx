@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { db } from "@/firebase/initFirebase";
 import Image from "next/image";
 import { Player } from "@lottiefiles/react-lottie-player";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 function Login() {
   const router = useRouter();
@@ -16,25 +18,51 @@ function Login() {
   const [adminEmail, setAdminEmail] = useState();
   const [adminPassword, setAdminPassword] = useState();
   const [teacherLogin, setTeacherLogin] = useState(true);
-  const [error, setError] = useState(null);
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const { login, signup, currentUser, logout } = useAuth();
 
   async function submitHandler(e) {
     e.preventDefault();
     if (!email || !password) {
-      setError("Please enter email and password");
+      toast.error("Enter Email and Password", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       return;
     }
     if (isLoggingIn) {
       try {
         if (teacherLogin) {
           await login(email, password);
+          toast.success("Logged In Successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
           router.push("/Teacher");
-          console.log("sab changa si teacher sab");
         }
       } catch (err) {
-        setError("Incorrect email or password");
+        toast.error("Incorrect Email or Password", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       }
       return;
     }
@@ -56,6 +84,19 @@ function Login() {
       <Head>
         <title>Login</title>
       </Head>
+      {/* <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      /> */}
+
       <div className="page-container">
         <div className={styles.container}>
           <div className={styles.box}>

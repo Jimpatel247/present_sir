@@ -1,0 +1,75 @@
+.section {
+    display: flex;
+    height: 87vh;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+}
+
+@media screen and (max-width: 968px) {
+    .section {
+        display: flex;
+        flex-direction: column;
+        padding-top: 5em;
+    }
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 5vw;
+    gap: 2em;
+    grid-column: 1/2;
+}
+
+
+.text p {
+    display: flex;
+    gap: 0.7em;
+    flex-direction: column;
+}
+
+.bigText {
+    font-size: 3.7vw;
+    font-weight: 600;
+}
+
+.smallText {
+    font-size: 1.3vw;
+    color: #8c8c8c;
+}
+
+.highlightPurple {
+    color: var(--color-purple);
+}
+
+.highlightGreen {
+    color: var(--color-green);
+}
+
+.lottie {
+    grid-column: 2/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.buttonContainer {
+    width: 100%;
+    text-align: center;
+}
+
+.buttonContainer button {
+    background-color: var(--color-green);
+    color: white;
+    border: none;
+    padding: 0.4em 1.2em;
+    width: 10rem;
+    border-radius: 0.5em;
+    font-size: 1.3vw;
+    font-weight: 500;
+    cursor: pointer;
+}

@@ -21,6 +21,7 @@ export default function AddAttendance() {
   const { id } = router.query;
   const docRef = doc(db, "attendance", id);
   const batchRef = collection(db, "batch");
+  const [subject, setSubject] = React.useState("");
   const [studentList, setStudentList] = React.useState([]);
   const [batchName, setBatchName] = React.useState("");
   const getList = async () => {
@@ -83,26 +84,26 @@ export default function AddAttendance() {
 
   const uploadHandler = (e) => {
     e.preventDefault();
-    const date=new Date();
+    const date = new Date();
     console.log(date);
-    var absent=[];
-    studentList.forEach((stud)=>{
-        if(!(stud.isPresent)){
-          absent.push(stud.en_no);
-        }
-    })
+    var absent = [];
+    studentList.forEach((stud) => {
+      if (!stud.isPresent) {
+        absent.push(stud.en_no);
+      }
+    });
     console.log(absent);
     const attenRef = doc(db, "attendance", id);
-    const newData={
-      absentNum:absent,
-      dateTime:date
-    }
-    console.log(newData)
-    const addData= async ()=>{
+    const newData = {
+      absentNum: absent,
+      dateTime: date,
+    };
+    console.log(newData);
+    const addData = async () => {
       await updateDoc(attenRef, {
-        data: arrayUnion(newData)
+        data: arrayUnion(newData),
       });
-    }
+    };
     addData();
     console.log("successfully added attendance");
   };
@@ -113,7 +114,9 @@ export default function AddAttendance() {
         <title>Add Attendance</title>
       </Head>
       <div className="page-container">
-        <h2 className={styles.heading}>{batchName}</h2>
+        <h2 className={styles.heading}>
+          {batchName} ({subject})
+        </h2>
         <div className={styles.formContainer}>
           <form className={styles.form} onSubmit={uploadHandler}>
             <table>
