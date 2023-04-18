@@ -18,12 +18,14 @@ import Head from "next/head";
 
 export default function AddAttendance() {
   const router = useRouter();
+  const { currentUser } = useAuth();
   const { id } = router.query;
   const docRef = doc(db, "attendance", id);
   const batchRef = collection(db, "batch");
   const [subject, setSubject] = React.useState("");
   const [studentList, setStudentList] = React.useState([]);
   const [batchName, setBatchName] = React.useState("");
+
   const getList = async () => {
     const docSnap = await getDoc(docRef);
     setBatchName(docSnap.data().sem + "th Sem " + docSnap.data().branch);
@@ -64,7 +66,21 @@ export default function AddAttendance() {
     }
   };
   useEffect(() => {
-    getList();
+    if (currentUser == null) {
+      toast.info("Please Login to continue", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      router.push("/auth/Login");
+    } else {
+      getList();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -105,7 +121,7 @@ export default function AddAttendance() {
       });
     };
     addData();
-    console.log("successfully added attendance");
+    router.push("/Teacher");
   };
 
   return (

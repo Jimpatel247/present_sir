@@ -18,6 +18,10 @@
     margin: 0.5rem 0;
 }
 
+.heading {
+    color: var(--color-orange);
+}
+
 .ratio {
     font-size: 0.7rem;
 }
@@ -37,4 +41,8 @@
     height: 100%;
     border-radius: 0.5rem;
     background-color: hsl(50, 100%, 50%);
+}
+
+.teacher {
+    font-size: 0.8rem;
 }
