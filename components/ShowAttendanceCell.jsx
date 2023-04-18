@@ -1,6 +1,11 @@
 import styles from "../src/styles/components/showAttendanceCell.module.css";
 
-export default function ShowAttendanceCell({ subject, attended, total }) {
+export default function ShowAttendanceCell({
+  subject,
+  teachers,
+  attended,
+  total,
+}) {
   return (
     <div className={styles.container}>
       <div className={styles.line}>
@@ -9,6 +14,14 @@ export default function ShowAttendanceCell({ subject, attended, total }) {
           {attended}/{total}
         </p>
       </div>
+      {teachers.map((teacher, key) => (
+        <div key={key} className={styles.line}>
+          <p className={styles.teacher}>{teacher.teacher}</p>
+          <p className={styles.ratio}>
+            {teacher.attended}/{teacher.total}
+          </p>
+        </div>
+      ))}
       <div className={styles.line}>
         <Percentagebar n={(100 * attended) / total} />
         <p className={styles.percent}>{(100 * attended) / total}%</p>

@@ -75,3 +75,8 @@
     overflow-x: scroll;
     padding: 1em;
   }
+
+  .Toastify__toast-theme--dark {
+    background-color: var(--dark-blue-dark-5) !important;
+    color: rgb(234, 234, 234) !important;
+  }
