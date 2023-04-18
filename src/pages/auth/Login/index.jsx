@@ -8,7 +8,18 @@ import Image from "next/image";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-
+import Cookies from 'js-cookie'
+import {
+  collection,
+  addDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  query,
+  where,
+  getDoc,
+  getDocs,
+} from "firebase/firestore";
 function Login() {
   const router = useRouter();
   const teacher = useRef(null);
@@ -20,39 +31,104 @@ function Login() {
   const [teacherLogin, setTeacherLogin] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const { login, signup, currentUser, logout } = useAuth();
+  
 
   async function submitHandler(e) {
     e.preventDefault();
-    if (!email || !password) {
-      toast.error("Enter Email and Password", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-      return;
-    }
+    
     if (isLoggingIn) {
       try {
         if (teacherLogin) {
-          await login(email, password);
-          toast.success("Logged In Successfully", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-          router.push("/Teacher");
+          if (!email || !password) {
+            toast.error("Enter Email and Password", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            return;
+          }
+          const q = query(
+            collection(db, "Teachers"),
+            where("email", "==", email)
+          );
+
+          const querySnapshot = await getDocs(q); 
+          if (querySnapshot.size != 0) {
+            await login(email, password).then(()=>{
+              Cookies.set("role","teacherRole");
+            });
+            toast.success("Logged In Successfully", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            router.push("/Teacher");
+          } else {
+            
+            toast.error("You are Not A Teacher, You are A cheater", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            router.push("/auth/Login");
+          }
+        } else {
+          const q = query(
+            collection(db, "admins"),
+            where("mail_id", "==", adminEmail)
+          );
+
+          const querySnapshot = await getDocs(q);
+          
+          if (querySnapshot.size != 0) {
+            await login(adminEmail, adminPassword).then(()=>{
+              
+              Cookies.set("role","adminRole24");
+            });
+            toast.success("Logged In Successfully", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+            router.push("/Admin");
+          } else {
+            
+            toast.error("You are Not A Admin", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            });
+
+            router.push("/auth/Login");
+          }
         }
       } catch (err) {
+        console.log(err);
         toast.error("Incorrect Email or Password", {
           position: "top-right",
           autoClose: 5000,
@@ -152,7 +228,7 @@ function Login() {
               </form>
             </div>
             <div ref={admin} className={styles.admin}>
-              <form>
+              <form onSubmit={submitHandler}>
                 <div className={styles.lottie}>
                   <Player autoplay loop src="/adminJSON.json"></Player>
                 </div>
