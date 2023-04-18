@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { db, auth } from "../../../firebase/initFirebase";
 import {
   collection,
@@ -16,10 +16,14 @@ import styles from "../../../styles/teacher/addattendance.module.css";
 import AddAttendanceCell from "components/AddAttendanceCell";
 import Head from "next/head";
 
+import { toast } from "react-toastify";
+import { useAuth } from "context/AuthContext";
+
 export default function AddAttendance() {
   const router = useRouter();
-  const { currentUser } = useAuth();
   const { id } = router.query;
+  //currentUser from context
+  const { currentUser } = useAuth();
   const docRef = doc(db, "attendance", id);
   const batchRef = collection(db, "batch");
   const [subject, setSubject] = React.useState("");
@@ -28,8 +32,9 @@ export default function AddAttendance() {
 
   const getList = async () => {
     const docSnap = await getDoc(docRef);
-    setBatchName(docSnap.data().sem + "th Sem " + docSnap.data().branch);
     if (docSnap.exists()) {
+      setBatchName(docSnap.data().sem + "th Sem " + docSnap.data().branch);
+      setSubject(docSnap.data().subject);
       console.log("Document data:", docSnap.data());
       const q = query(
         batchRef,
@@ -124,6 +129,20 @@ export default function AddAttendance() {
     router.push("/Teacher");
   };
 
+  const uploadFromTexthandler = (e) => {
+    e.preventDefault();
+    var absent = e.target.textData.value.split(",");
+    var pre = studentList[0]?.en_no.substring(0, 6);
+    absent.forEach((n, i) => {
+      if (n < 10) {
+        absent[i] = pre + "0" + n;
+      } else {
+        absent[i] = pre + n;
+      }
+    });
+    console.log(absent);
+  };
+
   return (
     <>
       <Head>
@@ -155,6 +174,26 @@ export default function AddAttendance() {
                 ))}
               </tbody>
             </table>
+            <div className={styles.btnCont}>
+              <button className={styles.btn} type="submit">
+                Upload
+              </button>
+            </div>
+          </form>
+        </div>
+        <div className={styles.formContainer}>
+          <form onSubmit={uploadFromTexthandler} className={styles.form}>
+            <h3>Upload from text</h3>
+            <label className={styles.textAreaLabel} htmlFor="textData">
+              Enter absent enrollment numbers seperated by comma:
+            </label>
+            <textarea
+              className={styles.textArea}
+              id="textData"
+              placeholder="15,24,36,57..."
+              cols="30"
+              rows="10"
+            ></textarea>
             <div className={styles.btnCont}>
               <button className={styles.btn} type="submit">
                 Upload
