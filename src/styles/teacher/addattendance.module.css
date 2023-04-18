@@ -115,3 +115,31 @@ input:checked+.slider {
     text-align: center;
     margin-bottom: 1em;
 }
+
+.form h3 {
+    font-size: 1.5rem;
+    color: var(--color-orange);
+    margin: .7em 1em;
+}
+
+
+.textArea {
+    width: 100%;
+    padding: 0.5em;
+    border: 0px;
+    color: white;
+    border-radius: 0.2em;
+    border-bottom: 2px solid var(--color-orange);
+    font-size: 1.2em;
+    resize: none;
+    background-color: var(--dark-blue-dark-3);
+}
+
+.textArea:focus {
+    outline: none;
+    bottom: 2px solid var(--color-orange);
+}
+
+.textAreaLabel {
+    margin: .7em 1em;
+}
