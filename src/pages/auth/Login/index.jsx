@@ -8,7 +8,7 @@ import Image from "next/image";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 import {
   collection,
   addDoc,
@@ -24,18 +24,17 @@ function Login() {
   const router = useRouter();
   const teacher = useRef(null);
   const admin = useRef(null);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const [adminEmail, setAdminEmail] = useState();
-  const [adminPassword, setAdminPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [adminEmail, setAdminEmail] = useState("");
+  const [adminPassword, setAdminPassword] = useState("");
   const [teacherLogin, setTeacherLogin] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(true);
   const { login, signup, currentUser, logout } = useAuth();
-  
 
   async function submitHandler(e) {
     e.preventDefault();
-    
+
     if (isLoggingIn) {
       try {
         if (teacherLogin) {
@@ -57,10 +56,10 @@ function Login() {
             where("email", "==", email)
           );
 
-          const querySnapshot = await getDocs(q); 
+          const querySnapshot = await getDocs(q);
           if (querySnapshot.size != 0) {
-            await login(email, password).then(()=>{
-              Cookies.set("role","teacherRole");
+            await login(email, password).then(() => {
+              Cookies.set("role", "teacherRole");
             });
             toast.success("Logged In Successfully", {
               position: "top-right",
@@ -74,7 +73,6 @@ function Login() {
             });
             router.push("/Teacher");
           } else {
-            
             toast.error("You are Not A Teacher, You are A cheater", {
               position: "top-right",
               autoClose: 5000,
@@ -94,11 +92,10 @@ function Login() {
           );
 
           const querySnapshot = await getDocs(q);
-          
+
           if (querySnapshot.size != 0) {
-            await login(adminEmail, adminPassword).then(()=>{
-              
-              Cookies.set("role","adminRole24");
+            await login(adminEmail, adminPassword).then(() => {
+              Cookies.set("role", "adminRole24");
             });
             toast.success("Logged In Successfully", {
               position: "top-right",
@@ -112,7 +109,6 @@ function Login() {
             });
             router.push("/Admin");
           } else {
-            
             toast.error("You are Not A Admin", {
               position: "top-right",
               autoClose: 5000,
