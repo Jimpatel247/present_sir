@@ -94,3 +94,17 @@
         border-top: 1px solid rgba(255, 255, 255, 0.363);
     }
 }
+
+.logout {
+    color: #fff;
+    background-color: var(--color-purple);
+    padding: 0.2rem .5rem;
+    border-radius: 0.5rem;
+    font-size: .7rem;
+    transform: scale(1.2);
+    max-height: 100%;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}

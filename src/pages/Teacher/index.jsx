@@ -18,16 +18,6 @@ function TeacherDash() {
 
   const getData = async () => {
     if (currentUser == null) {
-      toast.info("Please Login to continue", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
       router.push("/auth/Login");
     } else {
       const q = query(
