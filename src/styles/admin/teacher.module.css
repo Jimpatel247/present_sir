@@ -1,3 +1,8 @@
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
 .container {
     display: block;
     background-color: #2e3c62;
@@ -13,44 +18,12 @@
     width: 100%;
     overflow-x: hidden;
     position: relative;
+    padding-top: 2rem;
     transition: 0.5s;
 }
 
 
-.teacher {
-    display: block;
-    position: absolute;
-    width: 100%;
-    left: 0%;
-    height: 100%;
-    transition: 0.5s;
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.admin {
-    display: block;
-    left: 100%;
-    position: absolute;
-    width: 100%;
-    transition: 0.5s;
-    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-    height: 100%;
-}
-
-.lottie {
-    display: block;
-    position: relative;
-    height: 30%;
-    margin-top: 1em;
-}
-
-.lottie * {
-    height: 100%;
-    width: 100%;
-}
-
-.teacher>form,
-.admin>form {
+.box form {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -59,15 +32,9 @@
     width: 100%;
 }
 
-.teacher img,
-.admin img {
-    max-height: 30%;
-    margin: 5%;
-    mix-blend-mode: lighten;
-}
 
-.teacher>form h2,
-.admin>form h2 {
+.box form h2,
+.box form h2 {
     flex: 1;
     display: flex;
     align-items: center;
@@ -91,12 +58,12 @@
 }
 
 .emailInput,
-.passInput {
+.nameInput {
     padding: .7em;
     width: 100%;
     border: 2px solid transparent;
     border-radius: 4px;
-    color: white;
+    color: gray;
     background-color: transparent;
     border-bottom: 2px solid gray;
 }
@@ -106,7 +73,7 @@
 }
 
 .emailLabel,
-.passLabel {
+.nameLabel {
     position: absolute;
     cursor: text;
     top: 0;
@@ -118,21 +85,21 @@
 
 .emailInput:focus+.emailLabel,
 .emailInput:valid+.emailLabel,
-.passInput:focus+.passLabel,
-.passInput:valid+.passLabel {
+.nameInput:focus+.nameLabel,
+.nameInput:valid+.nameLabel {
     transform: translate(0.3em, -0.6em) scale(0.8);
     color: var(--color-orange);
     padding-inline: 5px;
     background-color: #2e3c62;
 }
 
-.passInput:focus+.passLabel,
-.passInput:valid+.passLabel {
+.nameInput:focus+.nameLabel,
+.nameInput:valid+.nameLabel {
     transform: translate(0.1em, -0.6em) scale(0.8);
 }
 
 .emailInput:is(:focus, :valid),
-.passInput:is(:focus, :valid) {
+.nameInput:is(:focus, :valid) {
     border: 2px solid var(--color-orange);
 }
 

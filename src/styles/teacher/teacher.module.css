@@ -1,0 +1,24 @@
+.container {
+    display: grid;
+    width: 98vw;
+    padding: 2.5vh 2.5vw;
+    background-color: var(--color-dark-blue);
+    gap: 1em;
+}
+
+.links {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.links>* {
+    text-decoration: none;
+    color: white;
+    width: 100%;
+}
+
+.heading {
+    color: var(--color-green);
+    padding-bottom: 0.5em;
+}

@@ -1,0 +1,48 @@
+.batchItem {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: .7em;
+    padding-inline: 1em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--dark-blue-light-2);
+    cursor: pointer;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+.batchdata {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    width: min(100%, 15rem);
+}
+
+@media screen and (max-width: 360px) {
+    .batchdata {
+        display: block;
+    }
+}
+
+
+.skeletonItem {
+    background-color: var(--dark-blue-light-2);
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    border-radius: 7px;
+    align-items: center;
+    padding: 0.5em;
+}
+
+.skeleton {
+    border-radius: 0.2em;
+    height: 1.8em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

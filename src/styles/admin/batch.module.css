@@ -1,0 +1,184 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.title {
+    color: var(--color-purple);
+}
+
+.form {
+    width: 100%;
+    padding: 1em;
+    background-color: var(--dark-blue-light-1);
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.412);
+    border-radius: 0.5em;
+}
+
+.group {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 3vh 2vw;
+    gap: 2rem;
+}
+
+.group .formGrp select {
+    border: none;
+    border-bottom: 1.5px solid #8800fe;
+    border-radius: 0.2em;
+}
+
+.formGrp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.subject {
+    display: flex;
+    flex-direction: column;
+    padding: 3vh 2vw;
+    gap: 2em;
+    width: fit-content;
+}
+
+.subject .formGrp {
+    gap: 0.5em;
+}
+
+.subjectItem {
+    display: flex;
+    gap: 1em;
+}
+
+.subject button {
+    margin: 0.5em 0;
+    font-size: 2rem;
+    padding: 0.2em 0.5em;
+    border: none;
+    border-radius: 0.5em;
+    background-color: var(--color-green);
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.fileUploadLabel {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    flex-grow: 1;
+    justify-content: center;
+    border: 2px dashed rgb(140, 140, 140);
+    align-items: center;
+    margin: 2vh 5vw;
+    padding-bottom: 1em;
+    max-height: 20em;
+    border-radius: 2em;
+    cursor: pointer;
+}
+
+.text {
+    max-width: min(15rem, 100%);
+    /* max-width: min-content; */
+}
+
+.fileInput {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--green-light-3);
+}
+
+.uploadIcon {
+    width: 30%;
+    height: auto;
+    color: rgb(140, 140, 140);
+}
+
+.fileInput::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.formGrp select,
+.formGrp input {
+    color: rgb(224, 224, 224);
+    background-color: transparent;
+    border: 1px solid var(--green-light-3);
+    padding: 0.5em;
+    border-radius: 0.3em;
+    background-color: var(--dark-blue-dark-3);
+    border: none;
+    border-bottom: 1px solid var(--green-light-3);
+}
+
+.formGrp select option {
+    background-color: white;
+}
+
+
+.formGrp select option {
+    color: black;
+}
+
+.formatSpecifier {
+    color: var(--green-light-1);
+    font-size: 0.7em;
+}
+
+.group2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+
+/* preview Data */
+
+
+.previewData {
+    width: 100%;
+    padding: 1em;
+    background-color: var(--dark-blue-light-1);
+    box-shadow: 0 0 0.5em 0.1em rgba(0, 0, 0, 0.412);
+    border-radius: 0.2em;
+}
+
+.previewData table {
+    border: 1px solid black;
+    width: clamp(15rem, 70%, 50rem);
+    min-width: fit-content;
+}
+
+.previewData table tbody tr:nth-child(odd) {
+    background-color: var(--dark-blue-light-2);
+}
+
+.previewData table td,
+.previewData table th {
+    border: 1px solid black;
+    padding: 0.5em;
+}
+
+.btnCont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+}
+
+.btnCont button {
+    color: white;
+    border: none;
+    background-color: var(--color-orange);
+    font-size: 1.2em;
+    padding: 0.4em .9em;
+    border-radius: 0.3em;
+    width: 10rem;
+    cursor: pointer;
+}
