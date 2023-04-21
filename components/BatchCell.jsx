@@ -11,6 +11,7 @@ export default function BatchCell({ branch, year, currentSem }) {
           {branch}({year})
         </div>
         <div className={styles.batchItem__sem}>{currentSem}th Sem</div>
+       
       </div>
       <IoIosArrowForward />
     </div>

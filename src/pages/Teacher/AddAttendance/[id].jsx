@@ -141,6 +141,22 @@ export default function AddAttendance() {
       }
     });
     console.log(absent);
+    const date = new Date();
+    console.log(date);
+    const attenRef = doc(db, "attendance", id);
+    const newData = {
+      absentNum: absent,
+      dateTime: date,
+    };
+    console.log(newData);
+    const addData = async () => {
+      await updateDoc(attenRef, {
+        data: arrayUnion(newData),
+      });
+    };
+    addData();
+    console.log("done")
+    router.push("/Teacher");
   };
 
   return (
