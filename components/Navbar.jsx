@@ -12,6 +12,7 @@ function Navbar() {
   const [active, setActive] = useState(false);
 
   const logoutHandler = async () => {
+    setActive(false);
     try {
       await logout().then(router.push("/auth/Login"));
     } catch (error) {
@@ -27,12 +28,12 @@ function Navbar() {
         <div>
           {active ? (
             <IoMdClose
-              onClick={() => setActive(!active)}
+              onClick={() => setActive(false)}
               className={styles.ham}
             />
           ) : (
             <RiMenu3Line
-              onClick={() => setActive(!active)}
+              onClick={() => setActive(true)}
               className={styles.ham}
             />
           )}
@@ -45,32 +46,34 @@ function Navbar() {
           }
         >
           <div className={styles.linkGrp}>
-            <Link onClick={() => setActive(!active)} href={"/Teacher"}>
+            <Link onClick={() => setActive(false)} href={"/Teacher"}>
               Teacher Dashboard
             </Link>
-            <Link onClick={() => setActive(!active)} href={"/Admin"}>
+            <Link onClick={() => setActive(false)} href={"/Admin"}>
               Admin DashBoard
             </Link>
           </div>
           <div className={styles.linkGrp}>
             <Link
-              onClick={() => setActive(!active)}
+              onClick={() => setActive(false)}
               // className={styles.lastLink}
               href={"/auth/Login"}
             >
               Login
             </Link>
             <Link
-              onClick={() => setActive(!active)}
+              onClick={() => setActive(false)}
               className={styles.lastLink}
               href={"/Student"}
             >
               Student
             </Link>
           </div>
-          <button className={styles.logout} onClick={logoutHandler}>
-            Logout
-          </button>
+          <div className={styles.linkGrp}>
+            <button className={styles.logout} onClick={logoutHandler}>
+              Logout
+            </button>
+          </div>
         </div>
       </nav>
       <div className={styles.buffer}></div>
