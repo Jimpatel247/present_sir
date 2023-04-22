@@ -20,7 +20,7 @@ import { AiOutlineCloudUpload } from "react-icons/ai";
 import { useRouter } from "next/router";
 
 function Batch() {
-  const routert = useRouter();
+  const router = useRouter();
   const q = query(collection(db, "Teachers"), where("email", "!=", null));
   const [teacherData, setTeacherData] = useState([]);
   const getData = async () => {
