@@ -20,6 +20,10 @@
     width: min(100%, 15rem);
 }
 
+.dataForTeacher {
+    width: min(100%, 20rem);
+}
+
 @media screen and (max-width: 360px) {
     .batchdata {
         display: block;

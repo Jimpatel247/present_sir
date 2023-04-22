@@ -3,7 +3,20 @@ import { IoIosArrowForward } from "react-icons/io";
 
 import styles from "../src/styles/components/batchCell.module.css";
 
-export default function BatchCell({ branch, year, currentSem }) {
+export default function BatchCell({ branch, year, currentSem, subject }) {
+  if (subject) {
+    return (
+      <div className={styles.batchItem}>
+        <div className={styles.batchdata + " " + styles.dataForTeacher}>
+          <div className={styles.batchItem__year}>
+            {branch} ({year}) ({subject})
+          </div>
+          <div className={styles.batchItem__sem}>{currentSem}th Sem</div>
+        </div>
+        <IoIosArrowForward />
+      </div>
+    );
+  }
   return (
     <div className={styles.batchItem}>
       <div className={styles.batchdata}>
@@ -11,7 +24,6 @@ export default function BatchCell({ branch, year, currentSem }) {
           {branch}({year})
         </div>
         <div className={styles.batchItem__sem}>{currentSem}th Sem</div>
-       
       </div>
       <IoIosArrowForward />
     </div>
