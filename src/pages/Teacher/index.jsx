@@ -31,7 +31,6 @@ function TeacherDash() {
       });
     }
   };
-
   useEffect(() => {
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -51,6 +50,7 @@ function TeacherDash() {
                 <Link key={key} href={`/Teacher/AddAttendance/${item.classId}`}>
                   <BatchCell
                     currentSem={item.sem}
+                    subject={item.subject}
                     branch={item.branch}
                     year={item.year}
                   />
