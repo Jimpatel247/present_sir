@@ -17,8 +17,10 @@ import {
 
 import styles from "../../../styles/admin/batch.module.css";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import { useRouter } from "next/router";
 
 function Batch() {
+  const router = useRouter();
   const q = query(collection(db, "Teachers"), where("email", "!=", null));
   const [teacherData, setTeacherData] = useState([]);
   const getData = async () => {
@@ -140,6 +142,7 @@ function Batch() {
                   });
                   console.log("class added FOR", docer.teacher);
                 });
+                router.push("/Admin");
               })
               .catch((error) => {
                 console.log("Error in adding attendance");
