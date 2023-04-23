@@ -6,6 +6,7 @@ import Link from "next/link";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { auth, db } from "@/firebase/initFirebase";
 import BatchCell, { Skeleton } from "components/BatchCell";
+import middleWares from "@/middleWares";
 
 function AdminDash() {
   const q = query(collection(db, "Teachers"), where("email", "!=", null));
@@ -119,4 +120,4 @@ function AdminDash() {
   );
 }
 
-export default AdminDash;
+export default middleWares(AdminDash);
