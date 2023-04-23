@@ -18,8 +18,9 @@ import Head from "next/head";
 
 import { toast } from "react-toastify";
 import { useAuth } from "context/AuthContext";
+import middleWares from "@/middleWares";
 
-export default function AddAttendance() {
+function AddAttendance() {
   const router = useRouter();
   const { id } = router.query;
   //currentUser from context
@@ -155,7 +156,7 @@ export default function AddAttendance() {
       });
     };
     addData();
-    console.log("done")
+    console.log("done");
     router.push("/Teacher");
   };
 
@@ -221,3 +222,5 @@ export default function AddAttendance() {
     </>
   );
 }
+
+export default middleWares(AddAttendance);
