@@ -18,6 +18,7 @@ import {
 import styles from "../../../styles/admin/batch.module.css";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { useRouter } from "next/router";
+import middleWares from "@/middleWares";
 
 function Batch() {
   const router = useRouter();
@@ -306,4 +307,4 @@ function Batch() {
   );
 }
 
-export default Batch;
+export default middleWares(Batch);
