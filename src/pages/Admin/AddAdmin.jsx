@@ -1,16 +1,17 @@
 import React from "react";
 import Head from "next/head";
-import {  useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 
 import { useRouter } from "next/router";
 import { auth, db } from "@/firebase/initFirebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {  collection, addDoc} from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
 
 import styles from "../../styles/login.module.css";
+import middleWares from "@/middleWares";
 
-export default function AddAdmin() {
+function AddAdmin() {
   const router = useRouter();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -109,3 +110,5 @@ export default function AddAdmin() {
     </>
   );
 }
+
+export default middleWares(AddAdmin);

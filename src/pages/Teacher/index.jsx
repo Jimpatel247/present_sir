@@ -10,6 +10,7 @@ import styles from "../../styles/teacher/teacher.module.css";
 import Link from "next/link";
 import BatchCell from "components/BatchCell";
 import { Skeleton } from "components/BatchCell";
+import middleWares from "../../middleWares";
 
 function TeacherDash() {
   const router = useRouter();
@@ -64,4 +65,4 @@ function TeacherDash() {
   );
 }
 
-export default TeacherDash;
+export default middleWares(TeacherDash);

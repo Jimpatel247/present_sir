@@ -18,22 +18,6 @@ import {
 import styles from "../../styles/student/showAttendance.module.css";
 
 export default function CheckAttendance() {
-  const data = [
-    {
-      subject: "VLSI",
-    },
-    {
-      subject: "Microprocessor",
-      total: 50,
-      attended: 18,
-    },
-    {
-      subject: "Computer Networks",
-
-      total: 50,
-      attended: 36,
-    },
-  ];
   const router = useRouter();
   const [subjects, setSubjects] = useState([]);
 
@@ -53,6 +37,7 @@ export default function CheckAttendance() {
     );
     await getDocs(q).then((querySnapshot) => {
       setSubjects([]);
+      var tempSubjects = [];
       querySnapshot.forEach((sub) => {
         // console.log(sub.data());
         const list = sub.data().data;
@@ -73,35 +58,34 @@ export default function CheckAttendance() {
             attended,
           };
           // console.log(newTeacher)
-          const ind = subjects.findIndex((ele) => {
-            ele.subject == sub.data().subject;
+          const ind = tempSubjects.findIndex((ele) => {
+            return ele.subject == sub.data().subject;
           });
           if (ind != -1) {
-            subjects[ind].teachers.push(newTeacher);
-            subjects[ind].total += newTeacher.total;
-            subjects[ind].attended += newTeacher.attended;
+            tempSubjects[ind].teachers.push(newTeacher);
+            tempSubjects[ind].total += newTeacher.total;
+            tempSubjects[ind].attended += newTeacher.attended;
 
-            setSubjects(subjects);
+            // setSubjects(tempSubjects);
           } else {
-            setSubjects((subjects) => [
-              ...subjects,
+            tempSubjects = [
+              ...tempSubjects,
               {
                 subject: sub.data().subject,
                 teachers: [newTeacher],
                 total: newTeacher.total,
                 attended: newTeacher.attended,
               },
-            ]);
+            ];
           }
         }
       });
+      setSubjects(tempSubjects);
     });
   };
 
   useEffect(() => {
-    console.log(formData);
     getList();
-    console.log("DATA: ", subjects);
     if (
       !formData.rollNo ||
       !formData.branch ||

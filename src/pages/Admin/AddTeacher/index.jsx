@@ -8,6 +8,7 @@ import { doc, collection, addDoc, query, where } from "firebase/firestore";
 
 import styles from "../../../styles/admin/teacher.module.css";
 import Image from "next/image";
+import middleWares from "@/middleWares";
 
 function Teacher() {
   const router = useRouter();
@@ -110,4 +111,4 @@ function Teacher() {
   );
 }
 
-export default Teacher;
+export default middleWares(Teacher);
