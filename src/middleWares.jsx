@@ -8,7 +8,6 @@ function middleWares(WrappedComponent) {
     const router = useRouter();
     useEffect(() => {
       const url = router.pathname;
-      console.log(role, url);
       if (role !== "teacherRole" && url.includes("/Teacher")) {
         router.push("/auth/Login");
       } else if (role !== "adminRole24" && url.includes("/Admin")) {
