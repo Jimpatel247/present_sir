@@ -8,12 +8,13 @@ First, clone the project:
 
 ```
 git clone https://github.com/Jimpatel247/present_sir.git
+```
 
 second, install all the dependencies
 
 ``` bash
 npm install
-
+```
 
 Third, run the development server:
 
