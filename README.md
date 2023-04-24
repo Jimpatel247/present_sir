@@ -6,6 +6,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, clone the project:
 
+```
+git clone https://github.com/Jimpatel247/present_sir.git
+
 second, install all the dependencies
 
 ``` bash
