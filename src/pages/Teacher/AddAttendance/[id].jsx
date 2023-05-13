@@ -36,7 +36,6 @@ function AddAttendance() {
     if (docSnap.exists()) {
       setBatchName(docSnap.data().sem + "th Sem " + docSnap.data().branch);
       setSubject(docSnap.data().subject);
-      console.log("Document data:", docSnap.data());
       const q = query(
         batchRef,
         where("branch", "==", docSnap.data().branch),
@@ -48,7 +47,6 @@ function AddAttendance() {
         .then((querySnapshot) => {
           setStudentList([]);
           querySnapshot.forEach((docer) => {
-            // console.log(docer.id, " => ", docer.data());
             const students = docer.data().students;
             setStudentList([]);
             students.forEach((stu) => {
@@ -64,11 +62,10 @@ function AddAttendance() {
           });
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     } else {
       // docSnap.data() will be undefined in this case
-      console.log("No such document!");
     }
   };
   useEffect(() => {
@@ -107,27 +104,24 @@ function AddAttendance() {
   const uploadHandler = (e) => {
     e.preventDefault();
     const date = new Date();
-    console.log(date);
     var absent = [];
     studentList.forEach((stud) => {
       if (!stud.isPresent) {
         absent.push(stud.en_no);
       }
     });
-    console.log(absent);
     const attenRef = doc(db, "attendance", id);
     const newData = {
       absentNum: absent,
       dateTime: date,
     };
-    console.log(newData);
     const addData = async () => {
       await updateDoc(attenRef, {
         data: arrayUnion(newData),
       });
     };
     addData();
-    router.push("/Teacher");
+    router.push(`/Teacher/Batch/${id}`);
   };
 
   const uploadFromTexthandler = (e) => {
@@ -141,23 +135,19 @@ function AddAttendance() {
         absent[i] = pre + n;
       }
     });
-    console.log(absent);
     const date = new Date();
-    console.log(date);
     const attenRef = doc(db, "attendance", id);
     const newData = {
       absentNum: absent,
       dateTime: date,
     };
-    console.log(newData);
     const addData = async () => {
       await updateDoc(attenRef, {
         data: arrayUnion(newData),
       });
     };
     addData();
-    console.log("done");
-    router.push("/Teacher");
+    router.push(`/Teacher/Batch/${id}`);
   };
 
   return (
