@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import styles from "../../../styles/teacher/addattendance.module.css";
 
-function index() {
+function BatchData() {
   const router = useRouter();
   const { BatchId } = router.query;
 
@@ -21,4 +21,4 @@ function index() {
   );
 }
 
-export default index;
+export default BatchData;
