@@ -5,6 +5,7 @@ import { RiMenu3Line } from "react-icons/ri";
 import { IoMdClose } from "react-icons/io";
 import { useAuth } from "context/AuthContext";
 import { useRouter } from "next/router";
+import Cookies from "js-cookie";
 
 function Navbar() {
   const router = useRouter();
@@ -15,6 +16,7 @@ function Navbar() {
     setActive(false);
     try {
       await logout().then(router.push("/auth/Login"));
+      Cookies.remove("role");
     } catch (error) {
       console.log(error);
     }

@@ -20,6 +20,7 @@ import {
   getDoc,
   getDocs,
 } from "firebase/firestore";
+
 function Login() {
   const router = useRouter();
   const teacher = useRef(null);
@@ -30,11 +31,20 @@ function Login() {
   const [adminPassword, setAdminPassword] = useState("");
   const [teacherLogin, setTeacherLogin] = useState(true);
   const [isLoggingIn, setIsLoggingIn] = useState(true);
-  const { login, signup, currentUser, logout } = useAuth();
+  const { login } = useAuth();
+  const [isChecking, setIsChecking] = useState(false);
+
+  useEffect(() => {
+    if (Cookies.get("role") === "TeacherRole") {
+      router.push("/Teacher");
+    } else if (Cookies.get("role") === "adminRole24") {
+      router.push("/Admin");
+    }
+  }, []);
 
   async function submitHandler(e) {
     e.preventDefault();
-
+    setIsChecking(true);
     if (isLoggingIn) {
       try {
         if (teacherLogin) {
@@ -49,6 +59,7 @@ function Login() {
               progress: undefined,
               theme: "dark",
             });
+            setIsChecking(false);
             return;
           }
           const q = query(
@@ -71,9 +82,10 @@ function Login() {
               progress: undefined,
               theme: "dark",
             });
+            setIsChecking(false);
             router.push("/Teacher");
           } else {
-            toast.error("You are Not A Teacher, You are A cheater", {
+            toast.error("You are not a Teacher", {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -83,6 +95,7 @@ function Login() {
               progress: undefined,
               theme: "dark",
             });
+            setIsChecking(false);
             router.push("/auth/Login");
           }
         } else {
@@ -107,9 +120,10 @@ function Login() {
               progress: undefined,
               theme: "dark",
             });
+            setIsChecking(false);
             router.push("/Admin");
           } else {
-            toast.error("You are Not A Admin", {
+            toast.error("You are not an Admin", {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
@@ -119,7 +133,7 @@ function Login() {
               progress: undefined,
               theme: "dark",
             });
-
+            setIsChecking(false);
             router.push("/auth/Login");
           }
         }
@@ -136,9 +150,9 @@ function Login() {
           theme: "dark",
         });
       }
+      setIsChecking(false);
       return;
     }
-    /* await signup(email, password) */
   }
   const changeUser = () => {
     if (teacherLogin) {
@@ -156,18 +170,6 @@ function Login() {
       <Head>
         <title>Login</title>
       </Head>
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover={false}
-        theme="dark"
-      /> */}
 
       <div className="page-container">
         <div className={styles.container}>
@@ -212,11 +214,21 @@ function Login() {
                       Password
                     </label>
                   </div>
-                  <input
+                  <button
+                    disabled={isChecking}
                     className={styles.submitBtn}
                     type="submit"
-                    value="LOGIN"
-                  />
+                  >
+                    {!isChecking && "Login"}
+                    <div
+                      className={styles.spinner}
+                      data-ischecking={isChecking}
+                    >
+                      <svg viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="20"></circle>
+                      </svg>
+                    </div>
+                  </button>
                   <p className={styles.changeUserLink} onClick={changeUser}>
                     Login as Admin
                   </p>
@@ -256,11 +268,21 @@ function Login() {
                       Password
                     </label>
                   </div>
-                  <input
+                  <button
+                    disabled={isChecking}
                     className={styles.submitBtn}
                     type="submit"
-                    value="LOGIN"
-                  />
+                  >
+                    {!isChecking && "Login"}
+                    <div
+                      className={styles.spinner}
+                      data-ischecking={isChecking}
+                    >
+                      <svg viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="20"></circle>
+                      </svg>
+                    </div>
+                  </button>
                   <p className={styles.changeUserLink} onClick={changeUser}>
                     Login as Teacher
                   </p>
