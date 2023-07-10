@@ -48,7 +48,7 @@ function TeacherDash() {
           <div className={styles.links}>
             {classData.map((item, key) => {
               return (
-                <Link key={key} href={`/Teacher/Batch/${item.classId}`}>
+                <Link key={key} href={`/Teacher/AddAttendance/${item.classId}`}>
                   <BatchCell
                     currentSem={item.sem}
                     subject={item.subject}
