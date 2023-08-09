@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { db, auth } from "../../../firebase/initFirebase";
 import {
   collection,
@@ -22,6 +22,8 @@ import middleWares from "@/middleWares";
 
 function AddAttendance() {
   const router = useRouter();
+  const dateRef = useRef();
+  const dateRef2 = useRef();
   const { id } = router.query;
   //currentUser from context
   const { currentUser } = useAuth();
@@ -90,7 +92,7 @@ function AddAttendance() {
   const handleCheckboxChange = (e) => {
     const en_no = e.target.id;
     const newStudentList = studentList.map((student) => {
-      if (student.en_no === en_no) {
+      if (student.en_no == en_no) {
         return {
           ...student,
           isPresent: !student.isPresent,
@@ -99,11 +101,15 @@ function AddAttendance() {
       return student;
     });
     setStudentList(newStudentList);
+    console.log(studentList);
   };
 
   const uploadHandler = (e) => {
     e.preventDefault();
-    const date = new Date();
+    let date = dateRef.current.value;
+    if (date === "") {
+      date = new Date().toLocaleString();
+    }
     var absent = [];
     studentList.forEach((stud) => {
       if (!stud.isPresent) {
@@ -121,7 +127,7 @@ function AddAttendance() {
       });
     };
     addData();
-    router.push(`/Teacher/Batch/${id}`);
+    router.push(`/Teacher`);
   };
 
   const uploadFromTexthandler = (e) => {
@@ -135,7 +141,10 @@ function AddAttendance() {
         absent[i] = pre + n;
       }
     });
-    const date = new Date();
+    let date = dateRef2.current.value;
+    if (date === "") {
+      date = new Date().toLocaleString();
+    }
     const attenRef = doc(db, "attendance", id);
     const newData = {
       absentNum: absent,
@@ -147,7 +156,7 @@ function AddAttendance() {
       });
     };
     addData();
-    router.push(`/Teacher/Batch/${id}`);
+    router.push(`/Teacher`);
   };
 
   return (
@@ -182,6 +191,7 @@ function AddAttendance() {
               </tbody>
             </table>
             <div className={styles.btnCont}>
+              <input type="date" ref={dateRef} />
               <button className={styles.btn} type="submit">
                 Upload
               </button>
@@ -202,6 +212,7 @@ function AddAttendance() {
               rows="10"
             ></textarea>
             <div className={styles.btnCont}>
+              <input type="date" ref={dateRef} />
               <button className={styles.btn} type="submit">
                 Upload
               </button>
