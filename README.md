@@ -13,6 +13,7 @@ git clone https://github.com/Jimpatel247/present_sir.git
 second, install all the dependencies
 
 ```bash
+
 npm install
 ```
 
@@ -33,13 +34,16 @@ password: Tejas Modi@123
 
 You can not view adminDashbord page due to security reason my brother/sister/uncle/aunty/sir/madam sorry!! 😐😐🙏
 
+
 For check Student's attendance You can use
+
 Roll NO. : UI20ECXX OR UI20CSXX;(01<=XX<=71)
 BATCH : ECE/CSE
 SEM:6
 YEAR :2020;
 
 Thank you for Reading This full page 😊😊😊
+
 
 ## Learn More
 
