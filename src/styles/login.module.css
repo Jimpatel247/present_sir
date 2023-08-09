@@ -137,16 +137,63 @@
 }
 
 .submitBtn {
-    padding: .7em;
+    padding: .4em;
     border: 0px;
     border-radius: 4px;
     color: white;
+    font-size: 1.1rem;
     background-color: var(--color-orange);
     cursor: pointer;
-    width: 70%;
+    width: 60%;
 }
 
 .changeUserLink {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.changeUserLink:hover {
+    color: var(--color-orange);
+}
+
+.spinner svg {
+    height: 1em;
+    aspect-ratio: 1/1;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dasharray: 1, 150;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -35;
+    }
+
+    100% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -124;
+    }
+}
+
+.spinner circle {
+    stroke: white;
+    stroke-linecap: round;
+    stroke-width: 5px;
+    fill: none;
+    animation: dash 1.5s ease-in-out infinite;
+}
+
+.spinner[data-ischecking=false] {
+    display: none;
 }

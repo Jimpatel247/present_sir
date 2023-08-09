@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { db, auth } from "../../../firebase/initFirebase";
 import {
   collection,
@@ -22,6 +22,8 @@ import middleWares from "@/middleWares";
 
 function AddAttendance() {
   const router = useRouter();
+  const dateRef = useRef();
+  const dateRef2 = useRef();
   const { id } = router.query;
   //currentUser from context
   const { currentUser } = useAuth();
@@ -36,7 +38,6 @@ function AddAttendance() {
     if (docSnap.exists()) {
       setBatchName(docSnap.data().sem + "th Sem " + docSnap.data().branch);
       setSubject(docSnap.data().subject);
-      console.log("Document data:", docSnap.data());
       const q = query(
         batchRef,
         where("branch", "==", docSnap.data().branch),
@@ -48,7 +49,6 @@ function AddAttendance() {
         .then((querySnapshot) => {
           setStudentList([]);
           querySnapshot.forEach((docer) => {
-            // console.log(docer.id, " => ", docer.data());
             const students = docer.data().students;
             setStudentList([]);
             students.forEach((stu) => {
@@ -64,11 +64,10 @@ function AddAttendance() {
           });
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     } else {
       // docSnap.data() will be undefined in this case
-      console.log("No such document!");
     }
   };
   useEffect(() => {
@@ -93,7 +92,7 @@ function AddAttendance() {
   const handleCheckboxChange = (e) => {
     const en_no = e.target.id;
     const newStudentList = studentList.map((student) => {
-      if (student.en_no === en_no) {
+      if (student.en_no == en_no) {
         return {
           ...student,
           isPresent: !student.isPresent,
@@ -102,32 +101,33 @@ function AddAttendance() {
       return student;
     });
     setStudentList(newStudentList);
+    console.log(studentList);
   };
 
   const uploadHandler = (e) => {
     e.preventDefault();
-    const date = new Date();
-    console.log(date);
+    let date = dateRef.current.value;
+    if (date === "") {
+      date = new Date().toLocaleString();
+    }
     var absent = [];
     studentList.forEach((stud) => {
       if (!stud.isPresent) {
         absent.push(stud.en_no);
       }
     });
-    console.log(absent);
     const attenRef = doc(db, "attendance", id);
     const newData = {
       absentNum: absent,
       dateTime: date,
     };
-    console.log(newData);
     const addData = async () => {
       await updateDoc(attenRef, {
         data: arrayUnion(newData),
       });
     };
     addData();
-    router.push("/Teacher");
+    router.push(`/Teacher`);
   };
 
   const uploadFromTexthandler = (e) => {
@@ -141,23 +141,22 @@ function AddAttendance() {
         absent[i] = pre + n;
       }
     });
-    console.log(absent);
-    const date = new Date();
-    console.log(date);
+    let date = dateRef2.current.value;
+    if (date === "") {
+      date = new Date().toLocaleString();
+    }
     const attenRef = doc(db, "attendance", id);
     const newData = {
       absentNum: absent,
       dateTime: date,
     };
-    console.log(newData);
     const addData = async () => {
       await updateDoc(attenRef, {
         data: arrayUnion(newData),
       });
     };
     addData();
-    console.log("done");
-    router.push("/Teacher");
+    router.push(`/Teacher`);
   };
 
   return (
@@ -192,6 +191,7 @@ function AddAttendance() {
               </tbody>
             </table>
             <div className={styles.btnCont}>
+              <input type="date" ref={dateRef} />
               <button className={styles.btn} type="submit">
                 Upload
               </button>
@@ -212,6 +212,7 @@ function AddAttendance() {
               rows="10"
             ></textarea>
             <div className={styles.btnCont}>
+              <input type="date" ref={dateRef} />
               <button className={styles.btn} type="submit">
                 Upload
               </button>

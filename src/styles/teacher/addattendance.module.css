@@ -35,7 +35,7 @@
 
 
 .switch input:focus+.slider {
-    outline: 2px solid #2196F3;
+    outline: 3px solid #2196F3;
 }
 
 input:checked+.slider {
@@ -94,7 +94,7 @@ input:checked+.slider {
 .btnCont {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     padding: 1em;
 }
 
@@ -142,4 +142,18 @@ input:checked+.slider {
 
 .textAreaLabel {
     margin: .7em 1em;
+}
+
+
+
+.addAttendanceBtn {
+    width: fit-content;
+    height: fit-content;
+    padding: 1em;
+}
+
+.addAttendanceBtn a,
+.addAttendanceBtn a:visited {
+    color: white;
+    text-decoration: none;
 }
