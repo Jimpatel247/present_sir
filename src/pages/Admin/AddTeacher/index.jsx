@@ -25,7 +25,6 @@ function Teacher() {
       var password = name + "@123";
       createUserWithEmailAndPassword(auth, email, password)
         .then(async function () {
-          console.log("teacher add hogaya");
           const docRef = await addDoc(collection(db, "Teachers"), {
             email: email,
             name: name,

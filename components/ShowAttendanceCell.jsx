@@ -24,7 +24,9 @@ export default function ShowAttendanceCell({
       ))}
       <div className={styles.line}>
         <Percentagebar n={(100 * attended) / total} />
-        <p className={styles.percent}>{(100 * attended) / total}%</p>
+        <p className={styles.percent}>
+          {Math.round((10000 * attended) / total) / 100}%
+        </p>
       </div>
     </div>
   );
